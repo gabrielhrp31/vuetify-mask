@@ -5,18 +5,19 @@
       v-bind:label="label"
       v-bind="properties"
       v-bind:maxlength="options.inputMask.length"
-      v-bind:append-icon="(value) ? 'mdi-check-circle' : ''"
-      v-bind:success="(value) ? true : false"
+      v-bind:append-icon="value ? 'mdi-check-circle' : ''"
+      v-bind:success="value ? true : false"
       v-on:keypress="keyPress"
-      v-on:blur="$emit('blur')"
-      v-on:change="$emit('change')"
-      v-on:click="$emit('click')"
-      v-on:focus="$emit('focus')"
-      v-on:keydown="$emit('keydown')"
-      v-on:mousedown="$emit('mousedown')"
-      v-on:mouseup="$emit('mouseup')"
+      v-on="$listeners"
       ref="ref"
-    ></v-text-field>
+    >
+      <template v-for="(_, name) in $scopedSlots" v-slot:[name]="slotData">
+        <slot :name="name" v-bind="slotData" />
+      </template>
+      <template v-for="(_, someOtherName) in $slots" v-slot:[someOtherName]>
+        <slot :name="someOtherName" />
+      </template>
+    </v-text-field>
   </div>
 </template>
 
@@ -28,27 +29,27 @@ export default {
   props: {
     value: {
       type: [String, Number],
-      default: "0",
+      default: "0"
     },
     label: {
       type: String,
-      default: "",
+      default: ""
     },
     properties: {
       type: Object,
       default: function() {
         return {};
-      },
+      }
     },
     options: {
       type: Object,
       default: function() {
         return {
           inputMask: "YYYY-MM-DD HH:mm:ss",
-          empty: "",
+          empty: ""
         };
-      },
-    },
+      }
+    }
   },
   data: () => ({}),
   /*
@@ -62,11 +63,10 @@ export default {
       },
       set: function(newValue) {
         this.$emit("input", this.machineFormat(newValue));
-      },
-    },
+      }
+    }
   },
-  watch: {
-  },
+  watch: {},
   methods: {
     humanFormat: function(value) {
       if (value) {
@@ -188,8 +188,7 @@ export default {
       setTimeout(() => {
         this.$refs.ref.focus();
       }, 500);
-    },
-
-  },
+    }
+  }
 };
 </script>

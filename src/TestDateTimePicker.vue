@@ -19,7 +19,7 @@
             locale: 'pt-BR',
             format: 'DD/MM/YYYY',
             closeOnDateClick: false,
-            useSeconds: false,
+            useSeconds: false
           }"
         />
         v-model: {{ value1 }} (milliseconds)
@@ -42,7 +42,7 @@
             locale: 'en-US',
             format: 'YYYY-MM-DD',
             closeOnDateClick: false,
-            useSeconds: false,
+            useSeconds: false
           }"
         />
         v-model: {{ value2 }} (milliseconds)
@@ -65,7 +65,7 @@
             locale: 'en-US',
             format: 'YYYY-MM-DD',
             closeOnDateClick: false,
-            useSeconds: true,
+            useSeconds: true
           }"
         />
         v-model: {{ value3 }} (milliseconds)
@@ -80,14 +80,14 @@ import DateTimePicker from "@/components/DateTimePicker.vue";
 export default {
   name: "app",
   components: {
-    "v-text-field-datetimepicker": DateTimePicker,
+    "v-text-field-datetimepicker": DateTimePicker
   },
   data: () => ({
     value1: 1558220700000,
 
     value2: 1558220700000,
 
-    value3: 1558220710000,
-  }),
+    value3: 1558220710000
+  })
 };
 </script>

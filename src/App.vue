@@ -18,10 +18,10 @@
             <v-text-field-integer />
           </v-col>
           <v-col cols="4" sm="4" md="4">
-            <v-text-field-creditcard />            
+            <v-text-field-creditcard />
           </v-col>
           <v-col cols="4" sm="4" md="4">
-            <v-text-field-phonenumber />            
+            <v-text-field-phonenumber />
           </v-col>
           <v-col cols="4" sm="4" md="4">
             <v-text-field-simplemask />
@@ -50,6 +50,15 @@
           <v-col cols="4" sm="4" md="4">
             <v-text-field-yearmonthdayday />
           </v-col>
+          <v-col cols="12">
+            <h1>Slot Working</h1>
+          </v-col>
+          <v-col cols="12" md="6" lg="4">
+            <v-text-field-simple-mask-with-append-slot />
+          </v-col>
+          <v-col cols="12" md="6" lg="4">
+            <v-text-field-simple-mask-with-append-icon />
+          </v-col>
         </v-row>
       </v-container>
     </v-card-text>
@@ -71,6 +80,8 @@ import testCep from "./TestCep.vue";
 import testFileBase64 from "./TestFileBase64.vue";
 import testDotNumber from "./TestDotNumber.vue";
 import testYearMonthDayDay from "./TestYearMonthDayDay.vue";
+import testSimpleMaskWithAppendSlot from "./TestSimpleMaskWithAppendSlot.vue";
+import testSimpleMaskWithAppendIcon from "./TestSimpleMaskWithAppendIcon.vue";
 
 export default {
   name: "app",
@@ -89,6 +100,8 @@ export default {
     "v-text-field-dotnumber": testDotNumber,
     "v-text-field-datetimepicker": testDateTimePicker,
     "v-text-field-yearmonthdayday": testYearMonthDayDay,
-  },
+    "v-text-field-simple-mask-with-append-slot": testSimpleMaskWithAppendSlot,
+    "v-text-field-simple-mask-with-append-icon": testSimpleMaskWithAppendIcon
+  }
 };
 </script>

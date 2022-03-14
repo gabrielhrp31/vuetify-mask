@@ -7,12 +7,12 @@
         disabled: false,
         outlined: true,
         clearable: true,
-        placeholder: '',
+        placeholder: ''
       }"
       v-bind:options="{
         outputMask: '##############',
         empty: null,
-        applyAfter: true,
+        applyAfter: true
       }"
     />
     v-model:
@@ -33,11 +33,11 @@ import Cnpj from "@/components/Cnpj.vue";
 
 export default {
   components: {
-    "v-text-field-cnpj": Cnpj,
+    "v-text-field-cnpj": Cnpj
   },
   data: () => ({
     value: "50703512000192", // 123 or "123" or "" or null
-    label: "CNPJ (Brazilian mask)",
-  }),
+    label: "CNPJ (Brazilian mask)"
+  })
 };
 </script>

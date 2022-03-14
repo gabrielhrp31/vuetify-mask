@@ -53,13 +53,7 @@
             v-bind="properties"
             v-on:keypress="keyPress"
             v-on:keyup="keyUpStartDay"
-            v-on:blur="$emit('blur')"
-            v-on:change="$emit('change')"
-            v-on:click="$emit('click')"
-            v-on:focus="$emit('focus')"
-            v-on:keydown="$emit('keydown')"
-            v-on:mousedown="$emit('mousedown')"
-            v-on:mouseup="$emit('mouseup')"
+            v-on:blur="$listeners"
           ></v-text-field>
         </v-col>
         <v-col cols="12" sm="10" md="2">
@@ -73,13 +67,7 @@
             v-bind="properties"
             v-on:keypress="keyPress"
             v-on:keyup="keyUpFinishDay"
-            v-on:blur="$emit('blur')"
-            v-on:change="$emit('change')"
-            v-on:click="$emit('click')"
-            v-on:focus="$emit('focus')"
-            v-on:keydown="$emit('keydown')"
-            v-on:mousedown="$emit('mousedown')"
-            v-on:mouseup="$emit('mouseup')"
+            v-on:blur="$listeners"
           ></v-text-field>
         </v-col>
       </v-row>
@@ -95,63 +83,103 @@ export default {
   props: {
     value: {
       type: String,
-      default: "",
+      default: ""
     },
     label: {
       type: String,
-      default: "Year;Month;StartDay;FinishDay;",
+      default: "Year;Month;StartDay;FinishDay;"
     },
     placeholder: {
       type: String,
-      default: "yyyy;mm;dd;",
+      default: "yyyy;mm;dd;"
     },
     properties: {
       type: Object,
-      default: function () {
+      default: function() {
         return {};
-      },
+      }
     },
     options: {
       type: Object,
       default: function() {
         return {
-          empty: "",
+          empty: ""
         };
-      },
-    },
+      }
+    }
   },
   data: () => ({
     year: "",
     month: "",
     startDay: "",
-    finishDay: "",
+    finishDay: ""
   }),
   watch: {
     value: {
       handler() {
         this.$nextTick(() => {
           if (this.value) {
-            this.year = this.value.toString().split(';')[0];
-            this.month = this.value.toString().split(';')[1];
-            this.startDay = this.value.toString().split(';')[2];
-            this.finishDay = this.value.toString().split(';')[3];
+            this.year = this.value.toString().split(";")[0];
+            this.month = this.value.toString().split(";")[1];
+            this.startDay = this.value.toString().split(";")[2];
+            this.finishDay = this.value.toString().split(";")[3];
           }
         });
       },
-      immediate: true,
+      immediate: true
     },
     year() {
-      this.$emit("input", this.year +";"+ this.month +";"+ this.startDay +";"+ this.finishDay +";");
+      this.$emit(
+        "input",
+        this.year +
+          ";" +
+          this.month +
+          ";" +
+          this.startDay +
+          ";" +
+          this.finishDay +
+          ";"
+      );
     },
     month() {
-      this.$emit("input", this.year +";"+ this.month +";"+ this.startDay +";"+ this.finishDay +";");
+      this.$emit(
+        "input",
+        this.year +
+          ";" +
+          this.month +
+          ";" +
+          this.startDay +
+          ";" +
+          this.finishDay +
+          ";"
+      );
     },
     startDay() {
-      this.$emit("input", this.year +";"+ this.month +";"+ this.startDay +";"+ this.finishDay +";");
+      this.$emit(
+        "input",
+        this.year +
+          ";" +
+          this.month +
+          ";" +
+          this.startDay +
+          ";" +
+          this.finishDay +
+          ";"
+      );
     },
     finishDay() {
-      this.$emit("input", this.year +";"+ this.month +";"+ this.startDay +";"+ this.finishDay +";");
-    },
+      this.$emit(
+        "input",
+        this.year +
+          ";" +
+          this.month +
+          ";" +
+          this.startDay +
+          ";" +
+          this.finishDay +
+          ";"
+      );
+    }
   },
   methods: {
     keyPress($event) {
@@ -172,23 +200,23 @@ export default {
           this.$refs.refMonth.focus();
         } else {
           if (this.year.length === 0) {
-            this.year = this.options.empty; 
+            this.year = this.options.empty;
           }
         }
       } else {
         this.month = this.options.empty;
         this.startDay = this.options.empty;
-        this.finishDay = this.options.empty; 
+        this.finishDay = this.options.empty;
       }
     },
     keyUpMonth() {
       if (this.year && this.year.length === 4) {
         if (this.month) {
-          if ((Number(this.month) < 0) || (Number(this.month) > 12)) {
+          if (Number(this.month) < 0 || Number(this.month) > 12) {
             this.month = this.options.empty;
           } else {
             if (this.month.length === 2) {
-              this.$refs.refStartDay.focus();    
+              this.$refs.refStartDay.focus();
             }
           }
         } else {
@@ -205,7 +233,10 @@ export default {
         if (this.month && this.month.length === 2) {
           if (this.startDay) {
             if (this.startDay.length === 2) {
-              let m = moment(this.year +"-"+ this.month +"-"+ this.startDay, 'YYYY-MM-DD');
+              let m = moment(
+                this.year + "-" + this.month + "-" + this.startDay,
+                "YYYY-MM-DD"
+              );
               if (!m.isValid()) {
                 this.startDay = this.options.empty;
               } else {
@@ -229,14 +260,17 @@ export default {
         if (this.month && this.month.length === 2) {
           if (this.startDay && this.startDay.length === 2) {
             if (this.finishDay) {
-              let m = moment(this.year +"-"+ this.month +"-"+ this.finishDay, 'YYYY-MM-DD');
+              let m = moment(
+                this.year + "-" + this.month + "-" + this.finishDay,
+                "YYYY-MM-DD"
+              );
               if (!m.isValid()) {
                 this.finishDay = this.options.empty;
               } else {
                 if (this.finishDay.length === 2) {
                   if (this.startDay > this.finishDay) {
-                    this.startDay = this.options.empty;      
-                    this.finishDay = this.options.empty;      
+                    this.startDay = this.options.empty;
+                    this.finishDay = this.options.empty;
                     this.$refs.refStartDay.focus();
                   }
                 }
@@ -264,8 +298,8 @@ export default {
     //         this.finishDay = this.options.empty;
     //       } else {
     //         if (this.startDay > this.finishDay) {
-    //           this.startDay = this.options.empty;      
-    //           this.finishDay = this.options.empty;      
+    //           this.startDay = this.options.empty;
+    //           this.finishDay = this.options.empty;
     //           this.$refs.refStartDay.focus();
     //         }
     //       }
@@ -288,9 +322,9 @@ export default {
           } else {
             this.$refs.refFinishDay.focus();
           }
-        } 
+        }
       }
     }
-  },
+  }
 };
 </script>

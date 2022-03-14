@@ -8,12 +8,12 @@
         disabled: false,
         outlined: false,
         clearable: true,
-        placeholder: '',
+        placeholder: ''
       }"
       v-bind:options="{
         length: 20,
         empty: null,
-        applyAfter: false,
+        applyAfter: false
       }"
     />
     v-model:
@@ -34,11 +34,11 @@ import DotNumber from "@/components/DotNumber.vue";
 
 export default {
   components: {
-    "v-text-field-dotnumber": DotNumber,
+    "v-text-field-dotnumber": DotNumber
   },
   data: () => ({
     value: "1.23.456.789", // 123 or "123" or "" or null
-    label: "Only Dot and Number",
-  }),
+    label: "Only Dot and Number"
+  })
 };
 </script>

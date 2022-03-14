@@ -23,17 +23,17 @@ export default {
   props: {
     value: {
       type: [String, Number],
-      default: "0",
+      default: "0"
     },
     label: {
       type: String,
-      default: "",
+      default: ""
     },
     properties: {
       type: Object,
       default: function() {
         return {};
-      },
+      }
     },
     options: {
       type: Object,
@@ -41,10 +41,10 @@ export default {
         return {
           inputMask: "#########",
           outputMask: "#########",
-          empty: "",
+          empty: ""
         };
-      },
-    },
+      }
+    }
   },
   data: () => ({}),
   /*
@@ -58,8 +58,8 @@ export default {
       },
       set: function(newValue) {
         this.$emit("input", this.machineFormat(newValue));
-      },
-    },
+      }
+    }
   },
   methods: {
     humanFormat: function(value) {
@@ -82,7 +82,6 @@ export default {
       }
       return value;
     },
-
 
     formatValue: function(value, mask) {
       return this.formatDefault(value, mask);
@@ -138,9 +137,7 @@ export default {
         result = true;
       }
       return result;
-    },
-
-
-  },
+    }
+  }
 };
 </script>

@@ -9,13 +9,13 @@
         disabled: false,
         outlined: false,
         clearable: true,
-        placeholder: '',
+        placeholder: ''
       }"
       v-bind:options="{
         locale: 'pt-BR',
         length: 3,
         precision: 2,
-        empty: null,
+        empty: null
       }"
     />
     v-model:
@@ -36,11 +36,11 @@ import Money from "@/components/Decimal.vue";
 
 export default {
   components: {
-    "v-text-field-percent": Money,
+    "v-text-field-percent": Money
   },
   data: () => ({
     value: "34.20", // 1.23 or "1.23" or "" or null
-    label: "Percent",
-  }),
+    label: "Percent"
+  })
 };
 </script>

@@ -24,17 +24,17 @@ export default {
   props: {
     value: {
       type: [String, Number],
-      default: "0",
+      default: "0"
     },
     label: {
       type: String,
-      default: "",
+      default: ""
     },
     properties: {
       type: Object,
       default: function() {
         return {};
-      },
+      }
     },
     options: {
       type: Object,
@@ -42,10 +42,10 @@ export default {
         return {
           inputMask: "###.###.###,##",
           outputMask: "#########.##",
-          empty: "",
+          empty: ""
         };
-      },
-    },
+      }
+    }
   },
   data: () => ({}),
   /*
@@ -59,8 +59,8 @@ export default {
       },
       set: function(newValue) {
         this.$emit("input", this.machineFormat(newValue));
-      },
-    },
+      }
+    }
   },
   watch: {},
   methods: {
@@ -182,8 +182,7 @@ export default {
       setTimeout(() => {
         this.$refs.ref.focus();
       }, 500);
-    },
-    
-  },
+    }
+  }
 };
 </script>

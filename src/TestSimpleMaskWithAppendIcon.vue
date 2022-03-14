@@ -10,17 +10,21 @@
         disabled: false,
         outlined: false,
         clearable: true,
-        placeholder: ''
+        placeholder: '',
+        appendIcon: 'mdi-magnify',
+        label: 'Simple Mask With Clicable Icon'
       }"
       v-bind:options="{
-        inputMask: '#### #### #### ####',
-        outputMask: '################',
+        inputMask: '##-####-####-###',
+        outputMask: '##-####-####-###',
         empty: null,
         applyAfter: false,
         alphanumeric: true,
         lowerCase: false
       }"
-    />
+      @click:append="alert"
+    >
+    </v-text-field-simplemask>
     v-model:
     {{
       value !== null && value !== ""
@@ -42,8 +46,13 @@ export default {
     "v-text-field-simplemask": SimpleMask
   },
   data: () => ({
-    value: "1234432112344321",
-    label: "Credit Card"
-  })
+    value: "23-A568-B953-356", // 1.23 or "1.23" or "" or null
+    label: "Simple Mask"
+  }),
+  methods: {
+    alert() {
+      alert("aaaaaaaaaa");
+    }
+  }
 };
 </script>

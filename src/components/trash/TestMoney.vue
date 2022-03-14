@@ -9,12 +9,12 @@
         disabled: disabled,
         outlined: false,
         clearable: true,
-        placeholder: ' ',
+        placeholder: ' '
       }"
       v-bind:options="{
         inputMask: '###.###.##0,00',
         outputMask: '########0.00',
-        empty: null,
+        empty: null
       }"
       ref="ref"
     />
@@ -40,12 +40,12 @@ import Money from "@/components/Money.vue";
 
 export default {
   components: {
-    "v-text-field-money": Money,
+    "v-text-field-money": Money
   },
   data: () => ({
     value: "123456789.00", // 1.23 or "1.23" or "" or null
     label: "Money",
-    disabled: false,
-  }),
+    disabled: false
+  })
 };
 </script>

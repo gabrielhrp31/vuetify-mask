@@ -10,7 +10,7 @@
         disabled: false,
         outlined: false,
         clearable: true,
-        placeholder: '',
+        placeholder: ''
       }"
       v-bind:options="{
         inputMask: '##-####-####-###',
@@ -18,7 +18,7 @@
         empty: null,
         applyAfter: false,
         alphanumeric: true,
-        lowerCase: false,
+        lowerCase: false
       }"
     />
     v-model:
@@ -39,11 +39,11 @@ import SimpleMask from "@/components/SimpleMask.vue";
 
 export default {
   components: {
-    "v-text-field-simplemask": SimpleMask,
+    "v-text-field-simplemask": SimpleMask
   },
   data: () => ({
     value: "23-A568-B953-356", // 1.23 or "1.23" or "" or null
-    label: "Simple Mask",
-  }),
+    label: "Simple Mask"
+  })
 };
 </script>

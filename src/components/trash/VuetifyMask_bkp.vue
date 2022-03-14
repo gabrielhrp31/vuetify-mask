@@ -30,17 +30,17 @@ export default {
   props: {
     value: {
       type: [String, Number],
-      default: "0",
+      default: "0"
     },
     label: {
       type: String,
-      default: "",
+      default: ""
     },
     properties: {
       type: Object,
       default: function() {
         return {};
-      },
+      }
     },
     options: {
       type: Object,
@@ -50,10 +50,10 @@ export default {
           outputMask: "#########",
           maskType: 1,
           empty: "",
-          applyAfter: false,
+          applyAfter: false
         };
-      },
-    },
+      }
+    }
   },
   data: () => ({}),
   /*
@@ -67,8 +67,8 @@ export default {
       },
       set: function(newValue) {
         this.$emit("input", this.machineFormat(newValue));
-      },
-    },
+      }
+    }
   },
   methods: {
     humanFormat: function(value) {
@@ -116,7 +116,7 @@ export default {
         let arrayValue = value.toString().split("");
         for (var i = 0; i < arrayValue.length; i++) {
           if (this.isInteger(arrayValue[i])) {
-              result = result + arrayValue[i];
+            result = result + arrayValue[i];
           }
         }
       }
@@ -312,7 +312,7 @@ export default {
         }
       }
       return result;
-    },
-  },
+    }
+  }
 };
 </script>

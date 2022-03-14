@@ -69,24 +69,24 @@ export default {
   props: {
     value: {
       type: [Number, String],
-      default: 0,
+      default: 0
     },
     label: {
       type: String,
-      default: "Label",
+      default: "Label"
     },
     properties: {
       type: Object,
       default: function() {
         return {};
-      },
+      }
     },
     options: {
       type: Object,
       default: function() {
         return {};
-      },
-    },
+      }
+    }
   },
   data: () => ({
     modDate: "",
@@ -94,7 +94,7 @@ export default {
     formattedDate: "",
     menu: false,
     readonly: true,
-    activeTab: 0,
+    activeTab: 0
   }),
   computed: {
     compShow: {
@@ -118,8 +118,8 @@ export default {
         THIS.modTime = this.options.useSeconds ? "00:00:00" : "00:00";
         THIS.formattedDate = null;
         this.$emit("input", null);
-      },
-    },
+      }
+    }
   },
   watch: {
     // When computed.compShow.formattedDate is changed:
@@ -136,7 +136,7 @@ export default {
           this.$refs.refTimePicker.selectingHour = true;
         }
       }
-    },
+    }
   },
   methods: {
     emit() {
@@ -151,8 +151,8 @@ export default {
       } else {
         this.activeTab = 1;
       }
-    },
-  },
+    }
+  }
 };
 // Str to milli
 // var d = Date.parse(date);

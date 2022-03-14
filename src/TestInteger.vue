@@ -8,13 +8,13 @@
         disabled: false,
         outlined: false,
         clearable: true,
-        placeholder: '',
+        placeholder: ''
       }"
       v-bind:options="{
         inputMask: '#########',
         outputMask: '#########',
         empty: null,
-        applyAfter: false,
+        applyAfter: false
       }"
     />
     v-model:
@@ -35,11 +35,11 @@ import Integer from "@/components/Integer.vue";
 
 export default {
   components: {
-    "v-text-field-integer": Integer,
+    "v-text-field-integer": Integer
   },
   data: () => ({
     value: "123456789", // 123 or "123" or "" or null
-    label: "Integer",
-  }),
+    label: "Integer"
+  })
 };
 </script>

@@ -8,15 +8,16 @@
       v-bind:append-icon="options.applyAfter && value ? 'mdi-check-circle' : ''"
       v-bind:success="options.applyAfter && value ? true : false"
       v-on:keypress="keyPress"
-      v-on:blur="$emit('blur')"
-      v-on:change="$emit('change')"
-      v-on:click="$emit('click')"
-      v-on:focus="$emit('focus')"
-      v-on:keydown="$emit('keydown')"
-      v-on:mousedown="$emit('mousedown')"
-      v-on:mouseup="$emit('mouseup')"
+      v-on="$listeners"
       ref="ref"
-    ></v-text-field>
+    >
+      <template v-for="(_, name) in $scopedSlots" v-slot:[name]="slotData">
+        <slot :name="name" v-bind="slotData" />
+      </template>
+      <template v-for="(_, someOtherName) in $slots" v-slot:[someOtherName]>
+        <slot :name="someOtherName" />
+      </template>
+    </v-text-field>
   </div>
 </template>
 
@@ -26,17 +27,17 @@ export default {
   props: {
     value: {
       type: [String, Number],
-      default: "0",
+      default: "0"
     },
     label: {
       type: String,
-      default: "",
+      default: ""
     },
     properties: {
       type: Object,
       default: function() {
         return {};
-      },
+      }
     },
     options: {
       type: Object,
@@ -44,13 +45,13 @@ export default {
         return {
           outputMask: "###########",
           empty: "",
-          applyAfter: false,
+          applyAfter: false
         };
-      },
-    },
+      }
+    }
   },
   data: () => ({
-    inputMask: "###.###.###-##",
+    inputMask: "###.###.###-##"
   }),
   /*
    v-model="cmpValue": Dessa forma, ao digitar, o valor é atualizado automaticamente no componente pai.
@@ -63,8 +64,8 @@ export default {
       },
       set: function(newValue) {
         this.$emit("input", this.machineFormat(newValue));
-      },
-    },
+      }
+    }
   },
   watch: {},
   methods: {
@@ -195,7 +196,7 @@ export default {
       if (rev == 10 || rev == 11) rev = 0;
       if (rev != parseInt(cpf.charAt(10))) return false;
       return true;
-    },
-  },
+    }
+  }
 };
 </script>

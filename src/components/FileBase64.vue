@@ -1,11 +1,6 @@
 <template>
   <div>
-    <v-dialog
-      v-model="showDialog"
-      scrollable
-      max-width="30%"
-      v-if="fileBase64"
-    >
+    <v-dialog v-model="showDialog" scrollable max-width="30%" v-if="fileBase64">
       <img v-bind:src="fileBase64" />
     </v-dialog>
     <v-text-field
@@ -37,33 +32,33 @@ export default {
   props: {
     value: {
       type: [String],
-      default: "",
+      default: ""
     },
     label: {
       type: String,
-      default: "",
+      default: ""
     },
     properties: {
       type: Object,
       default: function() {
         return {};
-      },
+      }
     },
     options: {
       type: Object,
       default: function() {
         return {
-          acceptFile:"image/*,application/pdf",
+          acceptFile: "image/*,application/pdf"
         };
-      },
-    },
+      }
+    }
   },
 
   data: () => ({
     imageName: "",
     imageFile: "",
     fileBase64: "",
-    showDialog: false,
+    showDialog: false
   }),
 
   computed: {
@@ -71,8 +66,8 @@ export default {
       get: function() {
         this.setImage(this.value);
         return this.imageName;
-      },
-    },
+      }
+    }
   },
 
   methods: {
@@ -105,7 +100,7 @@ export default {
       this.imageName = "";
       this.imageFile = "";
       this.fileBase64 = "";
-    },
+    }
     // /* Obter o nome da imagem selecionada */
     // getImageName: function() {
     //   return this.imageName;
@@ -126,6 +121,6 @@ export default {
     // setShowImage(showImage) {
     //   this.showImage = showImage;
     // },
-  },
+  }
 };
 </script>

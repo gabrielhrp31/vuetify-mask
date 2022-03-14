@@ -7,12 +7,12 @@
         disabled: false,
         outlined: true,
         clearable: true,
-        placeholder: '',
+        placeholder: ''
       }"
       v-bind:options="{
         outputMask: '########',
         empty: null,
-        applyAfter: true,
+        applyAfter: true
       }"
     />
     v-model:
@@ -33,11 +33,11 @@ import Cep from "@/components/Cep.vue";
 
 export default {
   components: {
-    "v-text-field-cep": Cep,
+    "v-text-field-cep": Cep
   },
   data: () => ({
     value: "82515260", // 1.23 or "1.23" or "" or null
-    label: "CEP (Brazilian mask)",
-  }),
+    label: "CEP (Brazilian mask)"
+  })
 };
 </script>

@@ -6,15 +6,16 @@
       v-bind="properties"
       v-bind:maxlength="options.length + options.precision"
       v-on:keypress="keyPress"
-      v-on:blur="$emit('blur')"
-      v-on:change="$emit('change')"
-      v-on:click="$emit('click')"
-      v-on:focus="$emit('focus')"
-      v-on:keydown="$emit('keydown')"
-      v-on:mousedown="$emit('mousedown')"
-      v-on:mouseup="$emit('mouseup')"
+      v-on="$listeners"
       ref="ref"
-    ></v-text-field>
+    >
+      <template v-for="(_, name) in $scopedSlots" v-slot:[name]="slotData">
+        <slot :name="name" v-bind="slotData" />
+      </template>
+      <template v-for="(_, someOtherName) in $slots" v-slot:[someOtherName]>
+        <slot :name="someOtherName" />
+      </template>
+    </v-text-field>
   </div>
 </template>
 
@@ -24,17 +25,17 @@ export default {
   props: {
     value: {
       type: [String, Number],
-      default: "0",
+      default: "0"
     },
     label: {
       type: String,
-      default: "",
+      default: ""
     },
     properties: {
       type: Object,
       default: function() {
         return {};
-      },
+      }
     },
     options: {
       type: Object,
@@ -43,10 +44,10 @@ export default {
           locale: "pt-BR",
           length: 11,
           precision: 2,
-          empty: null,
+          empty: null
         };
-      },
-    },
+      }
+    }
   },
   data: () => ({}),
   /*
@@ -60,8 +61,8 @@ export default {
       },
       set: function(newValue) {
         this.$emit("input", this.machineFormat(newValue));
-      },
-    },
+      }
+    }
   },
   watch: {},
   methods: {
@@ -69,7 +70,7 @@ export default {
       if (value || value === 0) {
         value = Number(value).toLocaleString(this.options.locale, {
           maximumFractionDigits: this.options.precision,
-          minimumFractionDigits: this.options.precision,
+          minimumFractionDigits: this.options.precision
         });
       } else {
         value = this.options.empty;
@@ -149,8 +150,7 @@ export default {
       setTimeout(() => {
         this.$refs.ref.focus();
       }, 500);
-    },
-    
-  },
+    }
+  }
 };
 </script>

@@ -9,11 +9,11 @@
         outlined: false,
         clearable: true,
         placeholder: 'YYYY-MM-DD HH:mm:ss',
-        'prepend-icon': 'mdi-calendar',
+        'prepend-icon': 'mdi-calendar'
       }"
       v-bind:options="{
         inputMask: 'YYYY-MM-DD HH:mm:ss',
-        empty: null,
+        empty: null
       }"
     />
     v-model:
@@ -34,11 +34,11 @@ import DateTime from "@/components/DateTime.vue";
 
 export default {
   components: {
-    "v-text-field-datetime": DateTime,
+    "v-text-field-datetime": DateTime
   },
   data: () => ({
     value: "1595386800000", // Milliseconds
-    label: "DateTime",
-  }),
+    label: "DateTime"
+  })
 };
 </script>

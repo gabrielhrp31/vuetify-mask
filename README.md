@@ -2,11 +2,14 @@
 
 ## Project
 vuetify-mask is a component for working with some of the main types of masks in the v-text-field.
+I forked package from [Juarez Nato](https://github.com/juareznasato/vuetify-mask) to solve component without slot inheritance problem.
 
-## Links
-[See Demo here](https://rzfpe.csb.app/).  
-[GitHub](https://github.com/juareznasato/vuetify-mask).  
-[npm](https://www.npmjs.com/package/vuetify-mask).
+[comment]: <> (## Links)
+[comment]: <> ([See Demo here]&#40;https://rzfpe.csb.app/&#41;.  )
+
+[comment]: <> ([GitHub]&#40;https://github.com/juareznasato/vuetify-mask&#41;.  )
+
+[comment]: <> ([npm]&#40;https://www.npmjs.com/package/vuetify-mask&#41;.)
 
 ## Dependencies
 - vuejs  
@@ -20,7 +23,7 @@ $ npm install vuetify-mask --save
 ```
 
 ## Register
-1- Create a file src/plugins/vuetify-mask.js with:  
+1- In main.js add this:  
 ```js
 import Vue from "vue";  
 import VuetifyMask from "vuetify-mask";  
@@ -28,10 +31,6 @@ Vue.use(VuetifyMask);
 export default VuetifyMask;
 ```
 
-2- Add in src/mains.js file:  
-```js
-import "./plugins/vuetify-mask.js";
-```
 
 ## Properties (v-bind:properties)
 You can add any v-text-field property  
@@ -66,15 +65,7 @@ v-bind:properties="{
 
 
 ## Events
-| Event | value | Description |
-| ------------ | ------------ | ------------ |
-| blur | Event | Emitted when the input is blurred |
-| change | any | Emitted when the input is changed by user interaction |
-| click | MouseEvent | Emitted when input is clicked |
-| focus | Event | Emitted when component is focused |
-| keydown | KeyboardEvent | Emitted when any key is pressed |
-| mousedown | MouseEvent | Emitted when click is pressed |
-| mouseup | MouseEvent | Event mouseup |
+All events documented in vuetify2 docs including slots events
 
 ## How to use
 
