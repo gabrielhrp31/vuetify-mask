@@ -53,5 +53,9 @@
     "vue": "^2.6.14",
     "vue-template-compiler": "^2.6.14",
     "vuetify": "^2.5.8"
-  }
+  },
+  "bugs": {
+    "url": "https://github.com/gabrielhrp31/vuetify-mask/issues"
+  },
+  "homepage": "https://github.com/gabrielhrp31/vuetify-mask#readme"
 }
