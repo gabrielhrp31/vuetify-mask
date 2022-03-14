@@ -1,5 +1,5 @@
 {
-  "name": "vuetify-mask",
+  "name": "vuetify-mask-with-slots",
   "version": "1.1.2",
   "description": "Mask components to vuetify 2 with Slots working",
   "private": false,

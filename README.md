@@ -19,7 +19,7 @@ I forked package from [Juarez Nato](https://github.com/juareznasato/vuetify-mask
 
 ## Install
 ```
-$ npm install vuetify-mask --save
+$ npm i vuetify-mask-with-slots --save
 ```
 
 ## Register
