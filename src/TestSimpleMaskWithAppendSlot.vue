@@ -14,7 +14,7 @@
       }"
       v-bind:options="{
         inputMask: '##-####-####-###',
-        outputMask: '##-####-####-###',
+        outputMask: '#############',
         empty: null,
         applyAfter: false,
         alphanumeric: true,

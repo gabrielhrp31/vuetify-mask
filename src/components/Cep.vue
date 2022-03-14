@@ -6,7 +6,7 @@
       v-bind="properties"
       v-bind:maxlength="inputMask.length"
       v-on:keypress="keyPress"
-      v-on="$listeners"
+      v-on="cmpListeners"
       ref="ref"
     >
       <template v-for="(_, name) in $scopedSlots" v-slot:[name]="slotData">
@@ -56,6 +56,10 @@ export default {
    O valor digitado entra pelo newValue do Set é emitido para o componente pai, retorna pelo get e pára.
   */
   computed: {
+    cmpListeners(){
+      delete this.$listeners.input;
+      return this.$listeners;
+    },
     cmpValue: {
       get: function() {
         return this.humanFormat(this.value);
