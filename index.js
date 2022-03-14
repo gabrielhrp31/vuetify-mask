@@ -1,13 +1,13 @@
-import Decimal from "./Decimal.vue";
-import Integer from "./Integer.vue";
-import DateTime from "./DateTime.vue";
-import DateTimePicker from "./DateTimePicker.vue";
-import SimpleMask from "./SimpleMask.vue";
-import Cpf from "./Cpf.vue";
-import Cnpj from "./Cnpj.vue";
-import Cep from "./Cep.vue";
-import FileBase64 from "./FileBase64.vue";
-import DotNumber from "./DotNumber.vue";
+import Decimal from "./src/components/Decimal.vue";
+import Integer from "./src/components/Integer.vue";
+import DateTime from "./src/components/DateTime.vue";
+import DateTimePicker from "./src/components/DateTimePicker.vue";
+import SimpleMask from "./src/components/SimpleMask.vue";
+import Cpf from "./src/components/Cpf.vue";
+import Cnpj from "./src/components/Cnpj.vue";
+import Cep from "./src/components/Cep.vue";
+import FileBase64 from "./src/components/FileBase64.vue";
+import DotNumber from "./src/components/DotNumber.vue";
 
 function install(Vue) {
   Vue.component("v-text-field-money", Decimal);
