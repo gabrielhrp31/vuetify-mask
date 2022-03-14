@@ -2,7 +2,7 @@
 
 ## Project
 vuetify-mask is a component for working with some of the main types of masks in the v-text-field.
-I forked package from [Juarez Nato](https://github.com/juareznasato/vuetify-mask) to solve component without slot inheritance problem.
+I forked package from [juareznasato](https://github.com/juareznasato/vuetify-mask) to solve component without slot inheritance problem.
 
 [comment]: <> (## Links)
 [comment]: <> ([See Demo here]&#40;https://rzfpe.csb.app/&#41;.  )
