@@ -6,6 +6,7 @@
       v-bind="properties"
       v-bind:maxlength="options.inputMask.length"
       v-on:keypress="keyPress"
+      @paste.stop="paste"
       ref="ref"
       v-on="cmpListeners"
     >
@@ -57,12 +58,13 @@ export default {
    O valor digitado entra pelo newValue do Set é emitido para o componente pai, retorna pelo get e pára.
   */
   computed: {
-    cmpListeners(){
+    cmpListeners() {
       delete this.$listeners.input;
       return this.$listeners;
     },
     cmpValue: {
       get: function() {
+        console.log(this.humanFormat(this.value));
         return this.humanFormat(this.value);
       },
       set: function(newValue) {
@@ -72,6 +74,16 @@ export default {
   },
   watch: {},
   methods: {
+    paste: function(e) {
+      let clipboardData = e.clipboardData || window.clipboardData;
+      let pastedData = clipboardData.getData("Text");
+      let valor = this.machineFormat(pastedData);
+      if (valor === this.value) {
+        e.preventDefault();
+        return;
+      }
+      this.$emit("input", valor);
+    },
     humanFormat: function(value) {
       if (value) {
         value = this.formatValue(value, this.options.inputMask);
@@ -80,7 +92,6 @@ export default {
       }
       return value;
     },
-
     machineFormat(value) {
       if (value) {
         value = this.formatValue(value, this.options.outputMask);

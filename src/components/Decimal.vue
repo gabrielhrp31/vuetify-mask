@@ -6,6 +6,7 @@
       v-bind="properties"
       v-bind:maxlength="options.length + options.precision"
       v-on:keypress="keyPress"
+      @paste.stop="paste"
       v-on="cmpListeners"
       ref="ref"
     >
@@ -70,6 +71,17 @@ export default {
   },
   watch: {},
   methods: {
+    paste: function(e) {
+      let clipboardData = e.clipboardData || window.clipboardData;
+      let pastedData = clipboardData.getData("Text");
+      let length = this.options.length + this.options.precision - 1;
+      let valor = this.machineFormat(pastedData.substring(0, length));
+      if (valor === this.value) {
+        e.preventDefault();
+        return;
+      }
+      this.$emit("input", valor);
+    },
     humanFormat: function(value) {
       if (value || value === 0) {
         value = Number(value).toLocaleString(this.options.locale, {
@@ -81,7 +93,6 @@ export default {
       }
       return value;
     },
-
     machineFormat(value) {
       if (value) {
         value = this.clearNumber(value);

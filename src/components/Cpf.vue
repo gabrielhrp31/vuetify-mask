@@ -8,6 +8,7 @@
       v-bind:append-icon="options.applyAfter && value ? 'mdi-check-circle' : ''"
       v-bind:success="options.applyAfter && value ? true : false"
       v-on:keypress="keyPress"
+      @paste.stop="paste"
       v-on="cmpListeners"
       ref="ref"
     >
@@ -73,6 +74,16 @@ export default {
   },
   watch: {},
   methods: {
+    paste: function(e) {
+      let clipboardData = e.clipboardData || window.clipboardData;
+      let pastedData = clipboardData.getData("Text");
+      let valor = this.machineFormat(pastedData);
+      if (valor === this.value) {
+        e.preventDefault();
+        return;
+      }
+      this.$emit("input", valor);
+    },
     humanFormat: function(value) {
       if (value) {
         value = this.formatValue(value, this.inputMask);
@@ -81,7 +92,6 @@ export default {
       }
       return value;
     },
-
     machineFormat(value) {
       if (value) {
         value = this.formatValue(value, this.options.outputMask);
