@@ -14,6 +14,7 @@
           v-model="compShow"
           v-bind:label="label"
           v-bind="properties"
+          :color="backgroundColor"
           v-on:click:append="(menu = true), (activeTab = 1)"
           v-on:click:clear="menu = false"
           v-on="on"
@@ -22,14 +23,14 @@
       <v-tabs
         dark
         class="elevation-2"
-        v-bind:background-color="options.tabBackgroundColor"
+        v-bind:background-color="backgroundColor"
         v-model="activeTab"
       >
         <v-tab v-bind:key="0">
           <v-icon left>mdi-calendar-outline</v-icon>
           {{ options.tabDateTitle }}
         </v-tab>
-        <v-tab v-bind:key="1">
+        <v-tab v-bind:key="1" v-if="time">
           <v-icon left>mdi-calendar-clock</v-icon>
           {{ options.tabTimeTitle }}
         </v-tab>
@@ -43,7 +44,7 @@
             ></v-date-picker>
           </v-card>
         </v-tab-item>
-        <v-tab-item v-bind:key="1">
+        <v-tab-item v-bind:key="1" v-if="time">
           <v-card flat>
             <v-time-picker
               landscape
@@ -71,6 +72,10 @@ export default {
       type: [Number, String],
       default: 0
     },
+    time: {
+      type: Boolean,
+      default: false
+    },
     label: {
       type: String,
       default: "Label"
@@ -97,6 +102,11 @@ export default {
     activeTab: 0
   }),
   computed: {
+    backgroundColor() {
+      return this.options && this.options?.tabBackgroundColor
+        ? this.options.tabBackgroundColor
+        : "secondary";
+    },
     compShow: {
       get: function() {
         const THIS = this;

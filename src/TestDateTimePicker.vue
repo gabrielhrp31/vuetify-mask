@@ -6,7 +6,6 @@
           v-model="value1"
           label="Data Hora"
           v-bind:properties="{
-            backgroundColor: '#EEE9E9',
             clearable: false,
             outlined: true,
             prependIcon: 'mdi-calendar',
