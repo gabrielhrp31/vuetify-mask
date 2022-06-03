@@ -59,12 +59,12 @@ export default {
   */
   computed: {
     cmpListeners() {
-      delete this.$listeners.input;
-      return this.$listeners;
+      let lis = { ...this.$listeners };
+      delete lis.input;
+      return lis;
     },
     cmpValue: {
       get: function() {
-        console.log(this.humanFormat(this.value));
         return this.humanFormat(this.value);
       },
       set: function(newValue) {

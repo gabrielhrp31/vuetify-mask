@@ -16,7 +16,8 @@
             tabTimeTitle: 'Hora',
             tabBackgroundColor: 'green',
             locale: 'pt-BR',
-            format: 'DD/MM/YYYY',
+            inputMask: 'YYYY-MM-DD',
+            outputMask: '##########',
             closeOnDateClick: false,
             useSeconds: false
           }"
@@ -34,12 +35,14 @@
             prependIcon: 'mdi-calendar',
             appendIcon: ''
           }"
+          time
           v-bind:options="{
             tabDateTitle: 'Date',
             tabTimeTitle: 'Time',
             tabBackgroundColor: 'blue',
-            locale: 'en-US',
-            format: 'YYYY-MM-DD',
+            locale: 'pt-BR',
+            inputMask: 'DD/MM/YYYY',
+            outputMask: '##########',
             closeOnDateClick: false,
             useSeconds: false
           }"
@@ -61,8 +64,9 @@
             tabDateTitle: 'Date',
             tabTimeTitle: 'Time',
             tabBackgroundColor: 'red',
-            locale: 'en-US',
-            format: 'YYYY-MM-DD',
+            locale: 'pt-BR',
+            inputMask: 'DD/MM/YYYY HH:MM:ss',
+            outputMask: '##################',
             closeOnDateClick: false,
             useSeconds: true
           }"

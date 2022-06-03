@@ -10,15 +10,17 @@
       max-width="100%"
     >
       <template v-slot:activator="{ on }">
-        <v-text-field
-          v-model="compShow"
+        <v-text-field-simplemask
+          :value="stringDate"
+          @input="input"
           v-bind:label="label"
-          v-bind="properties"
+          v-bind:properties="propertiesComp"
           :color="backgroundColor"
+          v-bind:options="optionsComp"
           v-on:click:append="(menu = true), (activeTab = 1)"
           v-on:click:clear="menu = false"
           v-on="on"
-        ></v-text-field>
+        />
       </template>
       <v-tabs
         dark
@@ -51,7 +53,7 @@
               ref="refTimePicker"
               format="24hr"
               v-model="modTime"
-              v-bind:color="options.tabBackgroundColor"
+              v-bind:color="backgroundColor"
               v-bind:use-seconds="options.useSeconds"
               v-on:change="(menu = false), emit()"
               v-bind:disabled="formattedDate === null || formattedDate === ''"
@@ -65,8 +67,13 @@
 
 <script>
 import moment from "moment";
+import SimpleMask from "@/components/SimpleMask.vue";
+
 export default {
   model: { prop: "value", event: "input" },
+  components: {
+    "v-text-field-simplemask": SimpleMask
+  },
   props: {
     value: {
       type: [Number, String],
@@ -94,50 +101,50 @@ export default {
     }
   },
   data: () => ({
+    stringDate: "",
     modDate: "",
     modTime: "00:00",
-    formattedDate: "",
     menu: false,
     readonly: true,
     activeTab: 0
   }),
   computed: {
+    optionsComp() {
+      return {
+        ...this.options,
+        inputMask: this.simpleMask,
+        outputMask: this.simpleMask,
+        empty: null,
+        applyAfter: false,
+        alphanumeric: false,
+        lowerCase: false
+      };
+    },
+    propertiesComp() {
+      return {
+        ...this.properties,
+        rules: [
+          ...(this.properties?.rules || []),
+          value => this.validDate(value)
+        ]
+      };
+    },
     backgroundColor() {
       return this.options && this.options?.tabBackgroundColor
         ? this.options.tabBackgroundColor
         : "secondary";
     },
-    compShow: {
-      get: function() {
-        const THIS = this;
-        let mdf = this.value
-          ? (THIS.formattedDate = moment(new Date(this.value)).format(
-              this.options.format
-            ))
-          : "";
-        let mt = this.value
-          ? (THIS.modTime = moment(new Date(this.value)).format(
-              this.options.useSeconds ? "HH:mm:ss" : "HH:mm"
-            ))
-          : "";
-        return mdf + " " + mt;
-      },
-      set: function() {
-        const THIS = this;
-        THIS.modDate = null;
-        THIS.modTime = this.options.useSeconds ? "00:00:00" : "00:00";
-        THIS.formattedDate = null;
-        this.$emit("input", null);
-      }
+    formattedDate() {
+      return this.value && moment(new Date(this.value)).isValid()
+        ? moment(new Date(this.value)).format("YYYY-MM-DD")
+        : null;
+    },
+    simpleMask() {
+      return this.options.inputMask.replace(/([a-zA-Z])/g, "#");
     }
   },
   watch: {
     // When computed.compShow.formattedDate is changed:
-    formattedDate() {
-      return this.value
-        ? (this.modDate = moment(new Date(this.value)).format("YYYY-MM-DD"))
-        : null;
-    },
     // Open always on date tab and selected hour
     menu() {
       if (!this.menu) {
@@ -148,7 +155,48 @@ export default {
       }
     }
   },
+  created() {
+    this.stringDate = this.returnStringDate(this.value);
+  },
+  updated() {
+    this.stringDate = this.returnStringDate(this.value);
+  },
   methods: {
+    input(value) {
+      this.stringDate = value;
+      if (
+        value &&
+        typeof value === "string" &&
+        value.length === this.simpleMask.length
+      ) {
+        let momentDate = moment(this.stringDate, this.options.inputMask);
+        if (momentDate.isValid()) {
+          this.$emit("input", momentDate.toDate().valueOf());
+        }
+      }
+    },
+    validDate(value) {
+      if (value && typeof value === "string") {
+        if (value.length != this.simpleMask.length) {
+          return this.properties?.incompleteMessage || "Incomplete Date!";
+        }
+        let momentDate = moment(this.stringDate, this.options.inputMask);
+        return (
+          momentDate.isValid() ||
+          this.properties?.invalidMessage ||
+          "Invalid Date!"
+        );
+      }
+      return true;
+    },
+    returnStringDate(miliDate) {
+      let value = "";
+      if (miliDate) {
+        value = new Date(miliDate);
+        value = moment(value).format(this.options.inputMask);
+        return value;
+      }
+    },
     emit() {
       this.$emit("input", this.stringToMillisecond(this.modDate, this.modTime));
     },
