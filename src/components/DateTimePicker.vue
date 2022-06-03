@@ -67,7 +67,7 @@
 
 <script>
 import moment from "moment";
-import SimpleMask from "@/components/SimpleMask.vue";
+import SimpleMask from "./SimpleMask.vue";
 
 export default {
   model: { prop: "value", event: "input" },
