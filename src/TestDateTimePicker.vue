@@ -1,14 +1,13 @@
 <template>
   <v-container>
     <v-row>
-      <v-col cols="4" sm="4" md="4">
+      <v-col cols="12" lg="4">
         <v-text-field-datetimepicker
           v-model="value1"
           label="Data Hora"
           v-bind:properties="{
             clearable: false,
             outlined: true,
-            prependIcon: 'mdi-calendar',
             appendIcon: 'mdi-av-timer'
           }"
           v-bind:options="{
@@ -24,7 +23,7 @@
         />
         v-model: {{ value1 }} (milliseconds)
       </v-col>
-      <v-col cols="4" sm="4" md="4">
+      <v-col cols="12" lg="4">
         <v-text-field-datetimepicker
           v-model="value2"
           label="Date Time Picker"
@@ -41,7 +40,7 @@
             tabTimeTitle: 'Time',
             tabBackgroundColor: 'blue',
             locale: 'pt-BR',
-            inputMask: 'DD/MM/YYYY',
+            inputMask: 'DD/MM/YYYY HH:mm:ss',
             outputMask: '##########',
             closeOnDateClick: false,
             useSeconds: false
@@ -49,7 +48,7 @@
         />
         v-model: {{ value2 }} (milliseconds)
       </v-col>
-      <v-col cols="4" sm="4" md="4">
+      <v-col cols="12" lg="4">
         <v-text-field-datetimepicker
           v-model="value3"
           label="Date Time Picker"
@@ -65,7 +64,7 @@
             tabTimeTitle: 'Time',
             tabBackgroundColor: 'red',
             locale: 'pt-BR',
-            inputMask: 'DD/MM/YYYY HH:MM:ss',
+            inputMask: 'DD/MM/YYYY',
             outputMask: '##################',
             closeOnDateClick: false,
             useSeconds: true

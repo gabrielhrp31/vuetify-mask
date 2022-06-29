@@ -1,73 +1,75 @@
 <template>
-  <div>
-    <v-menu
-      v-model="menu"
-      v-bind:close-on-content-click="false"
-      v-bind:nudge-right="40"
-      transition="scale-transition"
-      data-app="true"
-      offset-y
-      max-width="100%"
+  <v-menu
+    v-model="menu"
+    v-bind:close-on-content-click="false"
+    v-bind:nudge-right="40"
+    transition="scale-transition"
+    data-app="true"
+    offset-y
+    max-width="100%"
+  >
+    <template v-slot:activator="{}">
+      <v-text-field-simplemask
+        :value="stringDate"
+        @change="input"
+        v-bind:label="label"
+        v-bind:properties="propertiesComp"
+        :color="backgroundColor"
+        v-bind:options="optionsComp"
+        v-on:click:append="(menu = true), (activeTab = 0)"
+        v-on:click:clear="menu = false"
+      />
+    </template>
+    <v-tabs
+      dark
+      class="elevation-2"
+      v-bind:background-color="backgroundColor"
+      v-model="activeTab"
     >
-      <template v-slot:activator="{ on }">
-        <v-text-field-simplemask
-          :value="stringDate"
-          @input="input"
-          v-bind:label="label"
-          v-bind:properties="propertiesComp"
-          :color="backgroundColor"
-          v-bind:options="optionsComp"
-          v-on:click:append="(menu = true), (activeTab = 1)"
-          v-on:click:clear="menu = false"
-          v-on="on"
-        />
-      </template>
-      <v-tabs
-        dark
-        class="elevation-2"
-        v-bind:background-color="backgroundColor"
-        v-model="activeTab"
-      >
-        <v-tab v-bind:key="0">
-          <v-icon left>mdi-calendar-outline</v-icon>
-          {{ options.tabDateTitle }}
-        </v-tab>
-        <v-tab v-bind:key="1" v-if="time">
-          <v-icon left>mdi-calendar-clock</v-icon>
-          {{ options.tabTimeTitle }}
-        </v-tab>
-        <v-tab-item v-bind:key="0">
-          <v-card flat style="overflow: auto">
-            <v-date-picker
-              no-title
-              v-model="modDate"
-              v-on:change="closingControl(), emit()"
-              v-bind:locale="options.locale"
-            ></v-date-picker>
-          </v-card>
-        </v-tab-item>
-        <v-tab-item v-bind:key="1" v-if="time">
-          <v-card flat>
-            <v-time-picker
-              landscape
-              ref="refTimePicker"
-              format="24hr"
-              v-model="modTime"
-              v-bind:color="backgroundColor"
-              v-bind:use-seconds="options.useSeconds"
-              v-on:change="(menu = false), emit()"
-              v-bind:disabled="formattedDate === null || formattedDate === ''"
-            ></v-time-picker>
-          </v-card>
-        </v-tab-item>
-      </v-tabs>
-    </v-menu>
-  </div>
+      <v-tab v-bind:key="0">
+        <v-icon left>mdi-calendar-outline</v-icon>
+        {{ options.tabDateTitle }}
+      </v-tab>
+      <v-tab v-bind:key="1" v-if="time">
+        <v-icon left>mdi-calendar-clock</v-icon>
+        {{ options.tabTimeTitle }}
+      </v-tab>
+      <v-tab-item v-bind:key="0">
+        <v-card flat style="overflow: auto">
+          <v-date-picker
+            no-title
+            :value="formattedDate"
+            @change="changeDate"
+            v-bind:locale="options.locale"
+          ></v-date-picker>
+        </v-card>
+      </v-tab-item>
+      <v-tab-item v-bind:key="1" v-if="time">
+        <v-card flat>
+          <v-time-picker
+            landscape
+            ref="refTimePicker"
+            format="24hr"
+            :value="formattedHours"
+            v-bind:color="backgroundColor"
+            v-bind:use-seconds="options.useSeconds"
+            @input="changeHour"
+            @click:minute="time && !options.useSeconds ? (menu = false) : false"
+            @click:second="time && options.useSeconds ? (menu = false) : false"
+            v-bind:disabled="formattedHours === null || formattedHours === ''"
+          ></v-time-picker>
+        </v-card>
+      </v-tab-item>
+    </v-tabs>
+  </v-menu>
 </template>
 
 <script>
 import moment from "moment";
 import SimpleMask from "./SimpleMask.vue";
+const HOUR_FORMAT = "HH:mm";
+const HOUR_SECONDS_FORMAT = "HH:mm:ss";
+const DATE_FORMAT = "YYYY-MM-DD";
 
 export default {
   model: { prop: "value", event: "input" },
@@ -102,8 +104,6 @@ export default {
   },
   data: () => ({
     stringDate: "",
-    modDate: "",
-    modTime: "00:00",
     menu: false,
     readonly: true,
     activeTab: 0
@@ -123,6 +123,9 @@ export default {
     propertiesComp() {
       return {
         ...this.properties,
+        prependIcon: null,
+        "prepend-icon": null,
+        appendIcon: this.properties?.appendIcon || "mdi-calendar",
         rules: [
           ...(this.properties?.rules || []),
           value => this.validDate(value)
@@ -134,9 +137,17 @@ export default {
         ? this.options.tabBackgroundColor
         : "secondary";
     },
+    internalHourMask() {
+      return this.options?.useSeconds ? HOUR_SECONDS_FORMAT : HOUR_FORMAT;
+    },
     formattedDate() {
       return this.value && moment(new Date(this.value)).isValid()
-        ? moment(new Date(this.value)).format("YYYY-MM-DD")
+        ? moment(new Date(this.value)).format(DATE_FORMAT)
+        : null;
+    },
+    formattedHours() {
+      return this.value && moment(new Date(this.value)).isValid()
+        ? moment(new Date(this.value)).format(this.internalHourMask)
         : null;
     },
     simpleMask() {
@@ -153,15 +164,38 @@ export default {
           this.$refs.refTimePicker.selectingHour = true;
         }
       }
+    },
+    value(valor) {
+      this.stringDate = this.returnStringDate(valor);
     }
   },
   created() {
     this.stringDate = this.returnStringDate(this.value);
   },
-  updated() {
-    this.stringDate = this.returnStringDate(this.value);
-  },
   methods: {
+    changeDate(value) {
+      if (this.activeTab == 0) {
+        let momentCurrentDate = moment(new Date(this.value));
+        let momentNewDate = moment(
+          value + " " + momentCurrentDate.format(this.internalHourMask)
+        );
+        this.$emit("input", momentNewDate.toDate().getTime());
+        if (!this.time) {
+          this.menu = false;
+        } else {
+          this.activeTab = 1;
+        }
+      }
+    },
+    changeHour(value) {
+      if (this.activeTab == 1) {
+        let momentCurrentDate = moment(new Date(this.value));
+        let momentNewDate = moment(
+          momentCurrentDate.format(DATE_FORMAT) + " " + value
+        );
+        this.$emit("input", momentNewDate.toDate().getTime());
+      }
+    },
     input(value) {
       this.stringDate = value;
       if (
@@ -171,7 +205,7 @@ export default {
       ) {
         let momentDate = moment(this.stringDate, this.options.inputMask);
         if (momentDate.isValid()) {
-          this.$emit("input", momentDate.toDate().valueOf());
+          this.$emit("input", momentDate.toDate().getTime());
         }
       }
     },
@@ -196,12 +230,6 @@ export default {
         value = moment(value).format(this.options.inputMask);
         return value;
       }
-    },
-    emit() {
-      this.$emit("input", this.stringToMillisecond(this.modDate, this.modTime));
-    },
-    stringToMillisecond: function(date, time) {
-      return Date.parse(date + " " + time);
     },
     closingControl() {
       if (this.options.closeOnDateClick === true) {
