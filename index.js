@@ -1,6 +1,5 @@
 import Decimal from "./src/components/Decimal.vue";
 import Integer from "./src/components/Integer.vue";
-import DateTime from "./src/components/DateTime.vue";
 import DateTimePicker from "./src/components/DateTimePicker.vue";
 import SimpleMask from "./src/components/SimpleMask.vue";
 import Cpf from "./src/components/Cpf.vue";
@@ -13,7 +12,6 @@ function install(Vue) {
   Vue.component("v-text-field-money", Decimal);
   Vue.component("v-text-field-percent", Decimal);
   Vue.component("v-text-field-integer", Integer);
-  Vue.component("v-text-field-datetime", DateTime);
   Vue.component("v-text-field-datetimepicker", DateTimePicker);
   Vue.component("v-text-field-simplemask", SimpleMask);
   Vue.component("v-text-field-cpf", Cpf);
