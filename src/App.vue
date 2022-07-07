@@ -32,9 +32,6 @@
           <v-col cols="4" sm="4" md="4">
             <v-text-field-filebase64 />
           </v-col>
-          <v-col cols="4" sm="4" md="4">
-            <v-text-field-datetime />
-          </v-col>
           <v-col cols="12" sm="4" md="12">
             <v-text-field-datetimepicker />
           </v-col>
@@ -69,7 +66,6 @@
 import testMoney from "./TestMoney.vue";
 import testPercent from "./TestPercent.vue";
 import testInteger from "./TestInteger.vue";
-import testDateTime from "./TestDateTime.vue";
 import testDateTimePicker from "./TestDateTimePicker.vue";
 import testCreditCard from "./TestCreditCard.vue";
 import testPhoneNumber from "./TestPhoneNumber.vue";
@@ -89,7 +85,6 @@ export default {
     "v-text-field-money": testMoney,
     "v-text-field-percent": testPercent,
     "v-text-field-integer": testInteger,
-    "v-text-field-datetime": testDateTime,
     "v-text-field-creditcard": testCreditCard,
     "v-text-field-phonenumber": testPhoneNumber,
     "v-text-field-simplemask": testSimpleMask,

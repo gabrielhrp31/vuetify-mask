@@ -59,7 +59,7 @@ export default {
    O valor digitado entra pelo newValue do Set é emitido para o componente pai, retorna pelo get e pára.
   */
   computed: {
-    cmpListeners(){
+    cmpListeners() {
       delete this.$listeners.input;
       return this.$listeners;
     },

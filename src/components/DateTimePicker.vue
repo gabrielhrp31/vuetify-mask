@@ -11,11 +11,12 @@
     <template v-slot:activator="{}">
       <v-text-field-simplemask
         :value="stringDate"
-        @change="input"
+        @input="input"
+        :mask="simpleMask"
+        masked
         v-bind:label="label"
-        v-bind:properties="propertiesComp"
+        v-bind="propertiesComp"
         :color="backgroundColor"
-        v-bind:options="optionsComp"
         v-on:click:append="(menu = true), (activeTab = 0)"
         v-on:click:clear="menu = false"
       />
@@ -109,17 +110,6 @@ export default {
     activeTab: 0
   }),
   computed: {
-    optionsComp() {
-      return {
-        ...this.options,
-        inputMask: this.simpleMask,
-        outputMask: this.simpleMask,
-        empty: null,
-        applyAfter: false,
-        alphanumeric: false,
-        lowerCase: false
-      };
-    },
     propertiesComp() {
       return {
         ...this.properties,

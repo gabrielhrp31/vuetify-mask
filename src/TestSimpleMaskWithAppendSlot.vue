@@ -3,23 +3,7 @@
     <v-text-field-simplemask
       v-model="value"
       v-bind:label="label"
-      v-bind:properties="{
-        prefix: '',
-        suffix: '',
-        readonly: false,
-        disabled: false,
-        outlined: false,
-        clearable: true,
-        placeholder: ''
-      }"
-      v-bind:options="{
-        inputMask: '##-####-####-###',
-        outputMask: '#############',
-        empty: null,
-        applyAfter: false,
-        alphanumeric: true,
-        lowerCase: false
-      }"
+      mask="XX-XXXX-XXXX-XXX"
     >
       <template v-slot:append>
         <v-btn small :ripple="false" icon color="gray700" @click="alert">

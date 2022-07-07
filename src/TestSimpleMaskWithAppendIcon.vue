@@ -3,28 +3,9 @@
     <v-text-field-simplemask
       v-model="value"
       v-bind:label="label"
-      v-bind:properties="{
-        prefix: '',
-        suffix: '',
-        readonly: false,
-        disabled: false,
-        outlined: false,
-        clearable: true,
-        placeholder: '',
-        appendIcon: 'mdi-magnify',
-        label: 'Simple Mask With Clicable Icon'
-      }"
-      v-bind:options="{
-        inputMask: '##-####-####-###',
-        outputMask: '##-####-####-###',
-        empty: null,
-        applyAfter: false,
-        alphanumeric: true,
-        lowerCase: false
-      }"
+      mask="XX-XXXX-XXXX-XXX"
       @click:append="alert"
-    >
-    </v-text-field-simplemask>
+    />
     v-model:
     {{
       value !== null && value !== ""

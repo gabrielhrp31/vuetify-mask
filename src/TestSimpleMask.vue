@@ -1,57 +1,7 @@
 <template>
   <div>
-    <v-text-field-simplemask
-      v-model="value"
-      v-bind:label="label"
-      v-bind:properties="{
-        prefix: '',
-        suffix: '',
-        readonly: false,
-        disabled: false,
-        outlined: false,
-        clearable: true,
-        placeholder: ''
-      }"
-      v-bind:options="{
-        inputMask: '##-####-####-###',
-        outputMask: '##-####-####-###',
-        empty: null,
-        applyAfter: false,
-        alphanumeric: true,
-        lowerCase: false
-      }"
-    />
-    <v-text-field-simplemask
-      v-model="value"
-      v-bind:label="label"
-      v-bind:properties="{
-        prefix: '',
-        suffix: '',
-        readonly: false,
-        disabled: false,
-        outlined: false,
-        clearable: true,
-        placeholder: ''
-      }"
-      v-bind:options="{
-        inputMask: '##/##/####',
-        outputMask: '##/##/####',
-        empty: null,
-        applyAfter: false,
-        alphanumeric: true,
-        lowerCase: false
-      }"
-    />
-    v-model:
-    {{
-      value !== null && value !== ""
-        ? value
-        : value === null
-        ? "null"
-        : value === ""
-        ? "''"
-        : ""
-    }}
+    <v-text-field-simplemask mask="XX-XXXX-XXXX-XXX" v-model="value" />
+    {{ value }}
   </div>
 </template>
 

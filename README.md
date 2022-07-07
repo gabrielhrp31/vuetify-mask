@@ -2,7 +2,7 @@
 
 ## Project
 vuetify-mask is a component for working with some of the main types of masks in the v-text-field.
-I forked package from [juareznasato](https://github.com/juareznasato/vuetify-mask) to solve component without slot inheritance problem.
+I forked package from [juareznasato](https://github.com/juareznasato/vuetify-mask) to solve component without slot inheritance problem and in V3 merged with useful [VueTheMask](https://github.com/vuejs-tips/vue-the-mask).
 
 [comment]: <> (## Links)
 [comment]: <> ([See Demo here]&#40;https://rzfpe.csb.app/&#41;.  )
@@ -55,12 +55,12 @@ v-bind:properties="{
 ## Options (v-bind:options)
 | Option | Component | Default | Description |
 | ------------ | ------------ | ------------ | ------------ |
-| inputMask | Money, Percent, Integer, DateTime, SimpleMask  | | mask that will be applied in the v-text-field |
-| outputMask | Money, Percent, Integer, SimpleMask, CPF, CNPJ, CEP | | mask that will be applied in the v-model |
-| empty | Money, Percent, Integer, DateTime, SimpleMask, CPF, CNPJ, CEP, DotNumber | "" | Value in v-model when v-text-field is empty. Can be null, "" or other|
-| applyAfter | Integer, SimpleMask, CPF, CNPJ, CEP, DotNumber| | The value is masked only after all typing |
-| alphanumeric | SimpleMask | false | |
-| lowerCase| SimpleMask | false | |
+| inputMask | Money, Percent, Integer, DateTime  | | mask that will be applied in the v-text-field |
+| outputMask | Money, Percent, Integer,, CPF, CNPJ, CEP | | mask that will be applied in the v-model |
+| empty | Money, Percent, Integer, DateTime, CPF, CNPJ, CEP, DotNumber | "" | Value in v-model when v-text-field is empty. Can be null, "" or other|
+| applyAfter | Integer, CPF, CNPJ, CEP, DotNumber| | The value is masked only after all typing |
+| alphanumeric  | false | |
+| lowerCase | false | |
 | acceptFile| FileBase64 | image/* | Sets the file type to convert to base64 |
 
 
@@ -254,23 +254,7 @@ export default {
     <v-text-field-simplemask
       v-model="value"
       v-bind:label="label"
-      v-bind:properties="{
-        prefix: '',
-        suffix: '',
-        readonly: false,
-        disabled: false,
-        outlined: false,
-        clearable: true,
-        placeholder: '',
-      }"
-      v-bind:options="{
-        inputMask: '#### #### #### ####',
-        outputMask: '################',
-        empty: null,
-        applyAfter: false,
-        alphanumeric: true,
-        lowerCase: false,
-      }"
+			mask='#### #### #### ####'
       v-bind:focus="focus"
       v-on:focus="focus = false"
     />
@@ -294,23 +278,7 @@ export default {
     <v-text-field-simplemask
       v-model="value"
       v-bind:label="label"
-      v-bind:properties="{
-        prefix: '',
-        suffix: '',
-        readonly: false,
-        disabled: false,
-        outlined: false,
-        clearable: true,
-        placeholder: '',
-      }"
-      v-bind:options="{
-        inputMask: '(##) #####-####',
-        outputMask: '###########',
-        empty: null,
-        applyAfter: false,
-        alphanumeric: true,
-        lowerCase: false,
-      }"
+			mask='(##) #####-####',
       v-bind:focus="focus"
       v-on:focus="focus = false"
     />
@@ -336,23 +304,8 @@ export default {
     <v-text-field-simplemask
       v-model="value"
       v-bind:label="label"
-      v-bind:properties="{
-        prefix: '',
-        suffix: '',
-        readonly: false,
-        disabled: false,
-        outlined: false,
-        clearable: true,
-        placeholder: '',
-      }"
-      v-bind:options="{
-        inputMask: '##-####-####-###',
-        outputMask: '##-####-####-###',
-        empty: null,
-        applyAfter: false,
-        alphanumeric: true,
-        lowerCase: false,
-      }"
+			mask: 'XX-XXXX-XXXX-XXX',
+			masked
       v-bind:focus="focus"
       v-on:focus="focus = false"
     />
@@ -546,4 +499,28 @@ export default {
   }),
 };
 </script>
+```
+
+### - SimpleMask Tokens  (v-text-field-simplemask)
+```javascript
+'#': {pattern: /\d/},
+'X': {pattern: /[0-9a-zA-Z]/},
+'S': {pattern: /[a-zA-Z]/},
+'A': {pattern: /[a-zA-Z]/, transform: v => v.toLocaleUpperCase()},
+'a': {pattern: /[a-zA-Z]/, transform: v => v.toLocaleLowerCase()},
+'!': {escape: true}
+```
+You can customize using property tokens of v-text-field-simplemask 
+
+```html
+<v-text-field-simplemask mask="FFFFFF" :tokens="hexTokens" />
+```
+
+```javascript
+hexTokens: {
+  F: {
+    pattern: /[0-9a-fA-F]/,
+    transform: v => v.toLocaleUpperCase()
+  }
+}
 ```
