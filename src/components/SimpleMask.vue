@@ -6,7 +6,7 @@
     @input="onInput"
     ref="ref"
     v-bind="$attrs"
-    v-on="$listeners"
+    v-on="cmpListeners"
   >
     <template v-for="(_, name) in $scopedSlots" v-slot:[name]="slotData">
       <slot :name="name" v-bind="slotData" />
@@ -50,6 +50,12 @@ export default {
     }
   },
   computed: {
+    cmpListeners() {
+      let listeners = {};
+      Object.assign(listeners, this.$listeners);
+      delete listeners.input;
+      return listeners;
+    },
     config() {
       return {
         mask: this.mask,
