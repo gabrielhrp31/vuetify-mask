@@ -12,6 +12,8 @@
       <v-text-field-simplemask
         :value="stringDate"
         @input="input"
+        @keydown.delete="keydownDelete"
+        @click:clear="$emit('input', undefined)"
         :mask="simpleMask"
         masked
         v-bind:label="label"
@@ -197,6 +199,12 @@ export default {
         if (momentDate.isValid()) {
           this.$emit("input", momentDate.toDate().getTime());
         }
+      }
+    },
+    keydownDelete(e) {
+      let length = e.target.value?.length - 1 || 0;
+      if (length <= 0) {
+        this.$emit("input", null);
       }
     },
     validDate(value) {
