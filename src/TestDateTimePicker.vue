@@ -11,7 +11,7 @@
 					v-bind:properties="{
             clearable: false,
             outlined: true,
-            appendIcon: 'mdi-av-timer'
+            appendIcon: 'mdi-av-timer',
           }"
 					v-bind:options="{
             tabDateTitle: 'Data',
@@ -100,5 +100,6 @@ export default {
 
 		value3: 1558220710000,
 	}),
+	methods: {},
 };
 </script>

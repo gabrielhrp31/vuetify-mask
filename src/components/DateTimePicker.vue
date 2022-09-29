@@ -121,16 +121,20 @@ export default {
 		activeTab: 0,
 	}),
 	computed: {
+		computedRules() {
+			return (
+				this.properties?.rules?.map(
+					(ruleFunc) => (value) => ruleFunc(this.unixDate(value))
+				) || []
+			);
+		},
 		propertiesComp() {
 			return {
 				...this.properties,
 				prependIcon: null,
 				"prepend-icon": null,
 				appendIcon: this.properties?.appendIcon || "mdi-calendar",
-				rules: [
-					...(this.properties?.rules || []),
-					(value) => this.validDate(value),
-				],
+				rules: [...this.computedRules, (value) => this.validDate(value)],
 			};
 		},
 		backgroundColor() {
@@ -142,9 +146,7 @@ export default {
 			return this.options?.useSeconds ? HOUR_SECONDS_FORMAT : HOUR_FORMAT;
 		},
 		formattedDate() {
-			return this.value && moment(new Date(this.value)).isValid()
-				? moment(new Date(this.value)).format(DATE_FORMAT)
-				: null;
+			return this.formatDate(this.value);
 		},
 		formattedHours() {
 			return this.value && moment(new Date(this.value)).isValid()
@@ -255,6 +257,15 @@ export default {
 			} else {
 				this.activeTab = 1;
 			}
+		},
+		formatDate(valor) {
+			return valor && moment(new Date(valor)).isValid()
+				? moment(new Date(valor)).format(DATE_FORMAT)
+				: null;
+		},
+		unixDate(valor) {
+			let momentDate = moment(valor, this.options.inputMask);
+			return momentDate.isValid() ? momentDate.toDate().getTime() : null;
 		},
 	},
 };
