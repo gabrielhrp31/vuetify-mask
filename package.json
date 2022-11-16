@@ -1,64 +1,64 @@
 {
-  "name": "vuetify-mask-with-slots",
-  "version": "2.0.4",
-  "description": "Mask components to vuetify 2 with Slots working Perfectly and Merged with useful VueTheMask",
-  "private": false,
-  "license": "MIT",
-  "readmeFilename": "README.md",
-  "main": "index.js",
-  "author": {
-    "name": "Gabriel Rodrigues",
-    "email": "gabrielws31@gmail.com"
-  },
-  "keywords": [
-    "vuejs",
-    "vuetify",
-    "v-text-field",
-    "mask",
-    "number",
-    "money",
-    "integer",
-    "datetime",
-    "datetimepicker",
-    "decimal",
-    "percent",
-    "phonenumber",
-    "creditcard",
-    "cpf",
-    "cnpj",
-    "cep",
-    "base64"
-  ],
-  "repository": {
-    "type": "git",
-    "url": "https://github.com/gabrielhrp31/vuetify-mask.git"
-  },
-  "scripts": {
-    "serve": "vue-cli-service serve --port 8081",
-    "build": "vue-cli-service build",
-    "lint": "vue-cli-service lint"
-  },
-  "devDependencies": {
-    "@mdi/font": "^5.9.55",
-    "@vue/cli-plugin-babel": "~4.4.0",
-    "@vue/cli-plugin-eslint": "~4.4.0",
-    "@vue/cli-service": "^4.5.13",
-    "@vue/eslint-config-prettier": "^6.0.0",
-    "babel-eslint": "^10.1.0",
-    "eslint": "^6.7.2",
-    "eslint-plugin-prettier": "^3.4.1",
-    "eslint-plugin-vue": "^6.2.2",
-    "moment": "^2.29.1",
-    "prettier": "^1.19.1",
-    "vue": "^2.6.14",
-    "vue-template-compiler": "^2.6.14",
-    "vuetify": "^2.5.8"
-  },
-  "bugs": {
-    "url": "https://github.com/gabrielhrp31/vuetify-mask/issues"
-  },
-  "homepage": "https://github.com/gabrielhrp31/vuetify-mask#readme",
-  "dependencies": {
-    "vue-the-mask": "^0.11.1"
-  }
+	"name": "vuetify-mask-with-slots",
+	"version": "2.0.5",
+	"description": "Mask components to vuetify 2 with Slots working Perfectly and Merged with useful VueTheMask",
+	"private": false,
+	"license": "MIT",
+	"readmeFilename": "README.md",
+	"main": "index.js",
+	"author": {
+		"name": "Gabriel Rodrigues",
+		"email": "gabrielws31@gmail.com"
+	},
+	"keywords": [
+		"vuejs",
+		"vuetify",
+		"v-text-field",
+		"mask",
+		"number",
+		"money",
+		"integer",
+		"datetime",
+		"datetimepicker",
+		"decimal",
+		"percent",
+		"phonenumber",
+		"creditcard",
+		"cpf",
+		"cnpj",
+		"cep",
+		"base64"
+	],
+	"repository": {
+		"type": "git",
+		"url": "https://github.com/gabrielhrp31/vuetify-mask.git"
+	},
+	"scripts": {
+		"serve": "vue-cli-service serve --port 8081",
+		"build": "vue-cli-service build",
+		"lint": "vue-cli-service lint"
+	},
+	"devDependencies": {
+		"@mdi/font": "^5.9.55",
+		"@vue/cli-plugin-babel": "~4.4.0",
+		"@vue/cli-plugin-eslint": "~4.4.0",
+		"@vue/cli-service": "^4.5.13",
+		"@vue/eslint-config-prettier": "^6.0.0",
+		"babel-eslint": "^10.1.0",
+		"eslint": "^6.7.2",
+		"eslint-plugin-prettier": "^3.4.1",
+		"eslint-plugin-vue": "^6.2.2",
+		"moment": "^2.29.1",
+		"prettier": "^1.19.1",
+		"vue": "^2.6.14",
+		"vue-template-compiler": "^2.6.14",
+		"vuetify": "^2.5.8"
+	},
+	"bugs": {
+		"url": "https://github.com/gabrielhrp31/vuetify-mask/issues"
+	},
+	"homepage": "https://github.com/gabrielhrp31/vuetify-mask#readme",
+	"dependencies": {
+		"vue-the-mask": "^0.11.1"
+	}
 }
