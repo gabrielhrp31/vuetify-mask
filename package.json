@@ -1,6 +1,6 @@
 {
 	"name": "vuetify-mask-with-slots",
-	"version": "2.0.5",
+	"version": "2.0.6",
 	"description": "Mask components to vuetify 2 with Slots working Perfectly and Merged with useful VueTheMask",
 	"private": false,
 	"license": "MIT",

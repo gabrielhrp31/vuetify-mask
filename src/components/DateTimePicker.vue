@@ -172,7 +172,6 @@ export default {
     }
   },
   created() {
-    // console.log("completou", this.completedString);
     this.stringDate = this.returnStringDate(this.value);
   },
   methods: {
@@ -183,6 +182,7 @@ export default {
           value + " " + momentCurrentDate.format(this.internalHourMask)
         );
         this.$emit("input", momentNewDate.toDate().getTime());
+        this.completedString = false;
         if (!this.time) {
           this.menu = false;
         } else {
@@ -197,6 +197,7 @@ export default {
           momentCurrentDate.format(DATE_FORMAT) + " " + value
         );
         this.$emit("input", momentNewDate.toDate().getTime());
+        this.completedString = false;
       }
     },
     input(value) {
