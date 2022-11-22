@@ -114,11 +114,12 @@ export default {
   }),
   computed: {
     computedRules() {
-      return (
-        this.properties?.rules?.map(ruleFunc => value =>
+      if (this.properties && this.properties.rules) {
+        return this.properties.rules.map(ruleFunc => value =>
           ruleFunc(this.unixDate(value))
-        ) || []
-      );
+        );
+      }
+      return [];
     },
     propertiesComp() {
       return {
