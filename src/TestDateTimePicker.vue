@@ -90,6 +90,7 @@ export default {
     value2: 1558220700000,
     value3: 1558220710000
   }),
+  mounted() {},
   methods: {}
 };
 </script>

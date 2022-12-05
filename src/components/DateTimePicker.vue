@@ -81,8 +81,7 @@ export default {
   },
   props: {
     value: {
-      type: [Number, String],
-      default: 0
+      type: [Number, String]
     },
     time: {
       type: Boolean,
