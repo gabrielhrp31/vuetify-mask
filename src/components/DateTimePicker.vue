@@ -110,6 +110,7 @@ export default {
     menu: false,
     readonly: true,
     activeTab: 0,
+    deleted: false,
     completedString: false
   }),
   computed: {
@@ -165,6 +166,9 @@ export default {
       if (!this.completedString) {
         this.stringDate = this.returnStringDate(valor);
       }
+      if ((valor == null || valor == undefined) && !this.deleted) {
+        this.stringDate = "";
+      }
     },
     stringDate(value) {
       if (value?.length == this.simpleMask.length) {
@@ -202,6 +206,11 @@ export default {
       }
     },
     input(value) {
+      if (value.length < this.stringDate?.length) {
+        this.deleted = true;
+      } else if (value.length > this.stringDate?.length) {
+        this.deleted = false;
+      }
       this.stringDate = value;
       if (
         value &&
