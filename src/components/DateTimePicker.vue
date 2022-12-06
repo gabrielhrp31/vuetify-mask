@@ -142,8 +142,8 @@ export default {
       return this.formatDate(this.value);
     },
     formattedHours() {
-      return this.value && moment(new Date(this.value)).isValid()
-        ? moment(new Date(this.value)).format(this.internalHourMask)
+      return this.value && this.miliToMoment(this.value).isValid()
+        ? this.miliToMoment(this.value).format(this.internalHourMask)
         : null;
     },
     simpleMask() {
@@ -181,11 +181,17 @@ export default {
   methods: {
     changeDate(value) {
       if (this.activeTab == 0) {
-        let momentCurrentDate = moment(new Date(this.value));
+        let momentCurrentDate;
+        if (this.value) {
+          momentCurrentDate = this.miliToMoment(this.value);
+        }
         let momentNewDate = moment(
-          value + " " + momentCurrentDate.format(this.internalHourMask)
+          value +
+            (momentCurrentDate
+              ? " " + momentCurrentDate.format(this.internalHourMask)
+              : "")
         );
-        this.$emit("input", momentNewDate.toDate().getTime());
+        this.$emit("input", momentNewDate.valueOf());
         this.completedString = false;
         if (!this.time) {
           this.menu = false;
@@ -196,11 +202,11 @@ export default {
     },
     changeHour(value) {
       if (this.activeTab == 1) {
-        let momentCurrentDate = moment(new Date(this.value));
+        let momentCurrentDate = this.miliToMoment(this.value);
         let momentNewDate = moment(
           momentCurrentDate.format(DATE_FORMAT) + " " + value
         );
-        this.$emit("input", momentNewDate.toDate().getTime());
+        this.$emit("input", momentNewDate.valueOf());
         this.completedString = false;
       }
     },
@@ -218,7 +224,7 @@ export default {
       ) {
         let momentDate = moment(this.stringDate, this.options.inputMask);
         if (momentDate.isValid()) {
-          this.$emit("input", momentDate.toDate().getTime());
+          this.$emit("input", momentDate.valueOf());
         }
       }
     },
@@ -255,8 +261,8 @@ export default {
       } else {
         let value = "";
         if (miliDate) {
-          value = new Date(miliDate);
-          value = moment(value).format(this.options.inputMask);
+          // value = new Date(miliDate);
+          value = this.miliToMoment(miliDate).format(this.options.inputMask);
           return value;
         }
       }
@@ -269,13 +275,16 @@ export default {
       }
     },
     formatDate(valor) {
-      return valor && moment(new Date(valor)).isValid()
-        ? moment(new Date(valor)).format(DATE_FORMAT)
+      return valor && this.miliToMoment(valor).isValid()
+        ? this.miliToMoment(valor).format(DATE_FORMAT)
         : null;
     },
     unixDate(valor) {
       let momentDate = moment(valor, this.options.inputMask);
-      return momentDate.isValid() ? momentDate.toDate().getTime() : null;
+      return momentDate.isValid() ? momentDate.valueOf() : null;
+    },
+    miliToMoment(mili) {
+      return moment(mili.toString(), "x");
     }
   }
 };
