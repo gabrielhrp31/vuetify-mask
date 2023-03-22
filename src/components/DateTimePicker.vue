@@ -162,12 +162,11 @@ export default {
       }
     },
     value(valor) {
-      if (!this.completedString) {
-        this.stringDate = this.returnStringDate(valor);
-      }
-      if ((valor == null || valor == undefined) && !this.deleted) {
-        this.stringDate = "";
-      }
+			if(valor){
+        this.stringDate = this.returnStringDate(valor) || "";
+			}else{
+      	this.stringDate = "";
+			}
     },
     stringDate(value) {
       if (value?.length == this.simpleMask.length) {
