@@ -2,6 +2,30 @@
   <v-container>
     <v-row>
       <v-col cols="12" lg="4">
+        <v-text-field-datetimestringpicker
+          v-model="value4"
+          label="Data Hora"
+          v-bind:properties="{
+            clearable: false,
+            outlined: true,
+            appendIcon: 'mdi-av-timer'
+          }"
+          v-bind:options="{
+            tabDateTitle: 'Data',
+            tabTimeTitle: 'Hora',
+            tabBackgroundColor: 'green',
+            locale: 'pt-BR',
+            inputMask: 'YYYY-MM-DD',
+            outputMask: '##########',
+            closeOnDateClick: false,
+            useSeconds: false
+          }"
+        />
+        v-model: {{ value1 }} (milliseconds)
+      </v-col>
+    </v-row>
+    <v-row>
+      <v-col cols="12" lg="4">
         <v-text-field-datetimepicker
           v-model="value1"
           label="Data Hora"
@@ -21,7 +45,7 @@
             useSeconds: false
           }"
         />
-        v-model: {{ value1 }} (milliseconds)
+        v-model: {{ value4 }} (milliseconds)
       </v-col>
       <v-col cols="12" lg="4">
         <v-text-field-datetimepicker
@@ -78,17 +102,20 @@
 
 <script>
 import DateTimePicker from "@/components/DateTimePicker.vue";
+import DateTimeStringPicker from "@/components/DateTimeStringPicker.vue";
 
 export default {
   name: "app",
   components: {
-    "v-text-field-datetimepicker": DateTimePicker
+    "v-text-field-datetimepicker": DateTimePicker,
+    "v-text-field-datetimestringpicker": DateTimeStringPicker
   },
   data: () => ({
     value1: 1558220700000,
 
     value2: 1558220700000,
-    value3: 1558220710000
+    value3: 1558220710000,
+    value4: 1558220710000
   }),
   mounted() {},
   methods: {}
