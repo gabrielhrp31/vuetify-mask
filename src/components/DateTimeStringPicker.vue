@@ -105,7 +105,7 @@ export default {
     }
   },
   data: () => ({
-    stringDate: "",
+    stringDate: this.value,
     menu: false,
     readonly: true,
     activeTab: 0
@@ -155,8 +155,6 @@ export default {
     }
   },
   watch: {
-    // When computed.compShow.formattedDate is changed:
-    // Open always on date tab and selected hour
     menu() {
       if (!this.menu) {
         this.activeTab = 0;
@@ -164,7 +162,14 @@ export default {
           this.$refs.refTimePicker.selectingHour = true;
         }
       }
+    },
+    value(valor) {
+      this.stringDate =
+        valor.length == this.simpleMask.length ? valor : this.stringDate;
     }
+  },
+  created() {
+    this.stringDate = this.value;
   },
   methods: {
     changeDate(value) {
