@@ -13,7 +13,7 @@
         :value="stringDate"
         @input="input"
         @keyup.delete="keydownDelete"
-        @click:clear="$emit('input', undefined)"
+        @click:clear="$emit('input', '')"
         :mask="simpleMask"
         masked
         v-bind:label="label"
@@ -105,14 +105,14 @@ export default {
     }
   },
   data: () => ({
-    stringDate:"",
+    stringDate: "",
     menu: false,
     readonly: true,
     activeTab: 0
   }),
-	mounted(){
- 		this.stringDate = this.value;
-	},
+  mounted() {
+    this.stringDate = this.value;
+  },
   computed: {
     computedRules() {
       if (this.properties && this.properties.rules) {
