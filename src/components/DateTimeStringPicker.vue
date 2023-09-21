@@ -105,11 +105,14 @@ export default {
     }
   },
   data: () => ({
-    stringDate: this.value,
+    stringDate:"",
     menu: false,
     readonly: true,
     activeTab: 0
   }),
+	mounted(){
+ 		this.stringDate = this.value;
+	},
   computed: {
     computedRules() {
       if (this.properties && this.properties.rules) {
@@ -156,7 +159,7 @@ export default {
   },
   watch: {
     menu() {
-      if (!this.menu) {
+      if (!this.menu && this.activeTab && this.$refs?.refTimePicker) {
         this.activeTab = 0;
         if (this.$refs.refTimePicker) {
           this.$refs.refTimePicker.selectingHour = true;

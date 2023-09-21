@@ -104,14 +104,16 @@ export default {
       }
     }
   },
-  data: () => ({
-    stringDate: "",
-    menu: false,
-    readonly: true,
-    activeTab: 0,
-    deleted: false,
-    completedString: false
-  }),
+  data() {
+    return {
+      stringDate: "",
+      menu: false,
+      readonly: true,
+      activeTab: 0,
+      deleted: false,
+      completedString: false
+    };
+  },
   computed: {
     computedRules() {
       if (this.properties && this.properties.rules) {
@@ -154,7 +156,7 @@ export default {
     // When computed.compShow.formattedDate is changed:
     // Open always on date tab and selected hour
     menu() {
-      if (!this.menu) {
+      if (!this.menu && this.activeTab && this.$refs?.refTimePicker) {
         this.activeTab = 0;
         if (this.$refs.refTimePicker) {
           this.$refs.refTimePicker.selectingHour = true;
@@ -162,11 +164,11 @@ export default {
       }
     },
     value(valor) {
-			if(valor){
+      if (valor) {
         this.stringDate = this.returnStringDate(valor) || "";
-			}else{
-      	this.stringDate = "";
-			}
+      } else {
+        this.stringDate = "";
+      }
     },
     stringDate(value) {
       if (value?.length == this.simpleMask.length) {
