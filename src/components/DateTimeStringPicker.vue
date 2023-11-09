@@ -168,7 +168,7 @@ export default {
     },
     value(valor) {
       this.stringDate =
-        valor.length == this.simpleMask.length ? valor : this.stringDate;
+        valor?.length == this.simpleMask?.length ? valor : this.stringDate;
     }
   },
   created() {
