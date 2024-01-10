@@ -167,6 +167,10 @@ export default {
       }
     },
     value(valor) {
+      if (valor == null || valor == undefined) {
+        this.stringDate = "";
+        return;
+      }
       this.stringDate =
         valor?.length == this.simpleMask?.length ? valor : this.stringDate;
     }

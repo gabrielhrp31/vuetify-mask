@@ -21,7 +21,7 @@
             useSeconds: false
           }"
         />
-        v-model: {{ value4 }} (milliseconds)
+        v-model: {{ value4 }} (string date)
       </v-col>
     </v-row>
     <v-row>
@@ -117,7 +117,11 @@ export default {
     value3: 1558220710000,
     value4: "2000-01-31"
   }),
-  mounted() {},
+  mounted() {
+    setTimeout(() => {
+      this.value4 = null;
+    }, 1000);
+  },
   methods: {}
 };
 </script>
