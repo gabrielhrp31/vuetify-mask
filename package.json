@@ -1,6 +1,6 @@
 {
 	"name": "vuetify-mask-with-slots",
-	"version": "2.4.5",
+	"version": "2.4.6",
 	"description": "Mask components to vuetify 2 with Slots working Perfectly and Merged with useful VueTheMask",
 	"private": false,
 	"license": "MIT",
@@ -34,7 +34,7 @@
 		"url": "https://github.com/gabrielhrp31/vuetify-mask.git"
 	},
 	"scripts": {
-		"serve": "vue-cli-service serve --port 8081",
+		"serve": "set \"NODE_OPTIONS=--openssl-legacy-provider\" && vue-cli-service serve --port 8081",
 		"build": "vue-cli-service build",
 		"lint": "vue-cli-service lint"
 	},
@@ -59,6 +59,7 @@
 	},
 	"homepage": "https://github.com/gabrielhrp31/vuetify-mask#readme",
 	"dependencies": {
+		"v-money": "^0.8.1",
 		"vue-the-mask": "^0.11.1"
 	}
 }

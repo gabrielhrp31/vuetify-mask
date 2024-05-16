@@ -13,7 +13,7 @@
       }"
       v-bind:options="{
         locale: 'pt-BR',
-        length: 3,
+        length: 4,
         precision: 2,
         empty: null
       }"

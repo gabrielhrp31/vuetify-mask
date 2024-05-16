@@ -13,7 +13,7 @@
       }"
       v-bind:options="{
         locale: 'pt-BR',
-        length: 11,
+        length: 2,
         precision: 2,
         empty: null
       }"
@@ -44,7 +44,7 @@ export default {
     "v-text-field-money": Money
   },
   data: () => ({
-    value: 123456789.0, // 1.23 or "1.23" or "" or null
+    value: 123456789.8, // 1.23 or "1.23" or "" or null
     label: "Money",
     disabled: false
   })

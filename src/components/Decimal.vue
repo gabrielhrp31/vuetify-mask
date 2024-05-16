@@ -2,13 +2,11 @@
   <div>
     <v-text-field
       v-model="cmpValue"
-      v-bind:label="label"
       v-bind="properties"
-      v-bind:maxlength="options.length + options.precision"
       v-on:keypress="keyPress"
-      @paste.stop="paste"
-      v-on="cmpListeners"
-      ref="ref"
+      @paste="paste"
+      v-on:blur="onBlur"
+      ref="input"
     >
       <template v-for="(_, name) in $scopedSlots" v-slot:[name]="slotData">
         <slot :name="name" v-bind="slotData" />
@@ -25,17 +23,21 @@ export default {
   model: { prop: "value", event: "input" },
   props: {
     value: {
+      // type: String,
       type: [String, Number],
-      default: ""
+      default: "0"
     },
-    label: {
+    valueWhenIsEmpty: {
       type: String,
-      default: ""
+      default: "" // "0" or "" or null
     },
-    properties: {
+    valueOptions: {
       type: Object,
       default: function() {
-        return {};
+        return {
+          min: 0,
+          minEvent: "SetValueMin"
+        };
       }
     },
     options: {
@@ -43,80 +45,100 @@ export default {
       default: function() {
         return {
           locale: "pt-BR",
+          prefix: "",
+          suffix: "",
           length: 11,
-          precision: 2,
-          empty: null
+          precision: 2
         };
+      }
+    },
+    // Other v-text-field properties
+    properties: {
+      type: Object,
+      default: function() {
+        return {};
       }
     }
   },
   data: () => ({}),
   /*
    v-model="cmpValue": Dessa forma, ao digitar, o valor é atualizado automaticamente no componente pai.
-   O valor digitado entra pelo newValue do Set é emitido para o componente pai, retorna pelo get e pára.
+   O valor digitado entra pelo newValue do Set e é emitido para o componente pai.
+   the-vue-mask nao funciona corretamente ao incluir valores existentes no componente pai.
   */
   computed: {
-    cmpListeners() {
-      delete this.$listeners.input;
-      return this.$listeners;
-    },
     cmpValue: {
       get: function() {
-        return this.humanFormat(this.value);
+        return this.value !== null && this.value !== ""
+          ? this.humanFormat(this.value.toString())
+          : this.valueWhenIsEmpty;
       },
       set: function(newValue) {
         this.$emit("input", this.machineFormat(newValue));
       }
     }
   },
-  watch: {},
   methods: {
-    paste: function(e) {
+    paste(e) {
       let clipboardData = e.clipboardData || window.clipboardData;
       let pastedData = clipboardData.getData("Text");
-      let length = this.options.length + this.options.precision - 1;
-      let valor = this.machineFormat(pastedData.substring(0, length));
-      if (valor === this.value) {
+      if (isNaN(parseFloat(pastedData))) {
         e.preventDefault();
-        return;
       }
-      this.$emit("input", valor);
     },
-    humanFormat: function(value) {
-      if (value || value === 0) {
-        value = Number(value).toLocaleString(this.options.locale, {
+    humanFormat: function(number) {
+      if (isNaN(number)) {
+        number = "";
+      } else {
+        // number = Number(number).toLocaleString(this.options.locale, {maximumFractionDigits: 2, minimumFractionDigits: 2, style: 'currency', currency: 'BRL'});
+        number = Number(number).toLocaleString(this.options.locale, {
           maximumFractionDigits: this.options.precision,
           minimumFractionDigits: this.options.precision
         });
-      } else {
-        value = this.options.empty;
       }
-      return value;
+      return number;
     },
-    machineFormat(value) {
-      if (value) {
-        value = this.clearNumber(value);
+    machineFormat(number) {
+      if (number) {
+        number = this.cleanNumber(number);
         // Ajustar quantidade de zeros à esquerda
-        value = value.padStart(parseInt(this.options.precision) + 1, "0");
+        number = number.padStart(parseInt(this.options.precision) + 1, "0");
         // Incluir ponto na casa correta, conforme a precisão configurada
-        value =
-          value.substring(0, value.length - parseInt(this.options.precision)) +
+        number =
+          number.substring(
+            0,
+            number.length - parseInt(this.options.precision)
+          ) +
           "." +
-          value.substring(
-            value.length - parseInt(this.options.precision),
-            value.length
+          number.substring(
+            number.length - parseInt(this.options.precision),
+            number.length
           );
-        if (value === "") {
-          value = this.options.empty;
+        if (isNaN(number)) {
+          number = this.valueWhenIsEmpty;
         }
       } else {
-        value = this.options.empty;
+        number = this.valueWhenIsEmpty;
       }
-      return value;
+      if (this.options.precision === 0) {
+        number = this.cleanNumber(number);
+      }
+      return number;
     },
-
+    keyPress($event) {
+      // console.log($event.keyCode); //keyCodes value
+      let keyCode = $event.keyCode ? $event.keyCode : $event.which;
+      // if ((keyCode < 48 || keyCode > 57) && keyCode !== 46) {
+      if (keyCode < 48 || keyCode > 57) {
+        // 46 is dot
+        $event.preventDefault();
+      }
+      if (this.targetLength() && window.getSelection().type != "Range") {
+        $event.preventDefault();
+      }
+    },
     // Retira todos os caracteres não numéricos e zeros à esquerda
-    clearNumber: function(value) {
+    cleanNumber: function(value) {
       let result = "";
       if (value) {
         let flag = false;
@@ -128,11 +150,6 @@ export default {
               if (arrayValue[i] !== "0") {
                 result = result + arrayValue[i];
                 flag = true;
-              } else {
-                // Permitir zero quando valor igual a zero - Tipo 3 (Money or Percent)
-                if (Number(value) === 0) {
-                  result = result + arrayValue[i];
-                }
               }
             } else {
               result = result + arrayValue[i];
@@ -142,17 +159,6 @@ export default {
       }
       return result;
     },
-
-    keyPress($event) {
-      // console.log($event.keyCode); //keyCodes value
-      let keyCode = $event.keyCode ? $event.keyCode : $event.which;
-      // if ((keyCode < 48 || keyCode > 57) && keyCode !== 46) {
-      if (keyCode < 48 || keyCode > 57) {
-        // 46 is dot
-        $event.preventDefault();
-      }
-    },
-
     isInteger(value) {
       let result = false;
       if (Number.isInteger(parseInt(value))) {
@@ -160,11 +166,34 @@ export default {
       }
       return result;
     },
+    targetLength() {
+      if (
+        Number(this.cleanNumber(this.value).length) >=
+        Number(this.options.length)
+      ) {
+        return true;
+      } else {
+        return false;
+      }
+    },
+    onBlur() {
+      if (
+        this.value.length === 0 ||
+        parseFloat(this.value) <= this.valueOptions.min
+      )
+        this.$emit(
+          this.valueOptions.minEvent || "SetValueMin",
+          this.valueOptions.min
+        );
 
-    focus() {
-      setTimeout(() => {
-        this.$refs.ref.focus();
-      }, 500);
+      if (
+        this.valueOptions.max &&
+        parseFloat(this.value) >= this.valueOptions.max
+      )
+        this.$emit(
+          this.valueOptions.maxEvent || "SetValueMax",
+          this.valueOptions.max
+        );
     }
   }
 };
