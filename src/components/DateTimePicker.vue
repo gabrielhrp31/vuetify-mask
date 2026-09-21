@@ -149,7 +149,8 @@ export default {
         : null;
     },
     simpleMask() {
-      return this.options.inputMask.replace(/([a-zA-Z])/g, "#");
+      const mask = this.options.inputMask || "DD/MM/YYYY HH:mm";
+      return mask.replace(/([a-zA-Z])/g, "#");
     }
   },
   watch: {
@@ -250,23 +251,19 @@ export default {
       return true;
     },
     returnStringDate(miliDate) {
-      let isNumber = typeof miliDate === "string" ? false : true;
-      try {
-        parseInt(miliDate);
-      } catch (e) {
-        isNumber = false;
-      }
-      if (!isNumber) {
-        this.$emit("input", null);
+      if (miliDate == null || miliDate === "") {
         return "";
-      } else {
-        let value = "";
-        if (miliDate) {
-          // value = new Date(miliDate);
-          value = this.miliToMoment(miliDate).format(this.options.inputMask);
-          return value;
-        }
       }
+      const ms = typeof miliDate === "string" ? Number(miliDate) : miliDate;
+      if (Number.isNaN(ms)) {
+        return "";
+      }
+      const momentDate = this.miliToMoment(ms);
+      if (!momentDate.isValid()) {
+        return "";
+      }
+      const inputMask = this.options.inputMask || "DD/MM/YYYY HH:mm";
+      return momentDate.format(inputMask);
     },
     closingControl() {
       if (this.options.closeOnDateClick === true) {

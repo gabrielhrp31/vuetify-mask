@@ -151,7 +151,8 @@ export default {
       return this.options.inputMask;
     },
     simpleMask() {
-      return this.options.inputMask.replace(/([a-zA-Z])/g, "#");
+      const mask = this.options.inputMask || "DD/MM/YYYY HH:mm";
+      return mask.replace(/([a-zA-Z])/g, "#");
     },
     completedString() {
       return this.stringDate.length == this.simpleMask.length;

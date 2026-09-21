@@ -11,24 +11,24 @@ I forked package from [juareznasato](https://github.com/juareznasato/vuetify-mas
 
 [comment]: <> ([npm]&#40;https://www.npmjs.com/package/vuetify-mask&#41;.)
 
-## Dependencies
-- vuejs  
-- vuetify ($ npm install vuetify --save)  
-- moment ($ npm install moment --save)
-- material design icon ($ npm install @mdi/font -D --save)
+## Dependencies (peers)
+- vue `^2.6` / `^2.7`
+- vuetify `^2.6`
+- moment `^2.29` (required for DateTime* components)
+- material design icons (`@mdi/font`) for calendar/clock icons in date pickers
 
 ## Install
 ```
 $ npm i vuetify-mask-with-slots --save
+$ npm i vue@^2 vuetify@^2 moment --save
 ```
 
 ## Register
 1- In main.js add this:  
 ```js
 import Vue from "vue";  
-import VuetifyMask from "vuetify-mask";  
+import VuetifyMask from "vuetify-mask-with-slots";  
 Vue.use(VuetifyMask);  
-export default VuetifyMask;
 ```
 
 

@@ -1,0 +1,21 @@
+# Demo / tooling (library ships via package.json "files")
+src/App.vue
+src/Test*.vue
+src/main.js
+src/plugins/
+src/assets/
+src/components/trash/
+public/
+dist/
+index.html
+vite.config.js
+babel.config.js
+.eslintrc.js
+.browserslistrc
+jsconfig.json
+npm
+npm.sh
+*.log
+.DS_Store
+.idea/
+.vscode/

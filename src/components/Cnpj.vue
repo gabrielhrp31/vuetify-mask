@@ -60,8 +60,9 @@ export default {
   */
   computed: {
     cmpListeners() {
-      delete this.$listeners.input;
-      return this.$listeners;
+      const listeners = { ...this.$listeners };
+      delete listeners.input;
+      return listeners;
     },
     cmpValue: {
       get: function() {

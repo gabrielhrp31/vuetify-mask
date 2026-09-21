@@ -60,8 +60,9 @@ export default {
   */
   computed: {
     cmpListeners() {
-      delete this.$listeners.input;
-      return this.$listeners;
+      const listeners = { ...this.$listeners };
+      delete listeners.input;
+      return listeners;
     },
     cmpValue: {
       get: function() {
@@ -199,6 +200,7 @@ export default {
         return false;
       // Validar 1o digito
       let add = 0;
+      let rev;
       for (var i = 0; i < 9; i++) add += parseInt(cpf.charAt(i)) * (10 - i);
       rev = 11 - (add % 11);
       if (rev == 10 || rev == 11) rev = 0;
@@ -206,7 +208,7 @@ export default {
       // Validar 2o digito
       add = 0;
       for (var j = 0; j < 10; j++) add += parseInt(cpf.charAt(j)) * (11 - j);
-      let rev = 11 - (add % 11);
+      rev = 11 - (add % 11);
       if (rev == 10 || rev == 11) rev = 0;
       if (rev != parseInt(cpf.charAt(10))) return false;
       return true;
