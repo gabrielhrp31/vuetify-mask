@@ -9,7 +9,8 @@ export const messages = {
     },
     nav: {
       story: "Story",
-      examples: "Examples"
+      examples: "Examples",
+      demo: "Demo"
     },
     hero: {
       eyebrow: "Vue 2 · Vuetify 2 · slots",
@@ -79,7 +80,8 @@ export const messages = {
     },
     nav: {
       story: "História",
-      examples: "Exemplos"
+      examples: "Exemplos",
+      demo: "Demo"
     },
     hero: {
       eyebrow: "Vue 2 · Vuetify 2 · slots",

@@ -8,6 +8,14 @@
       <nav class="hero__nav">
         <span class="hero__brand">vuetify-mask</span>
         <div class="hero__links">
+          <a class="hero__link" href="#examples">{{ t("nav.examples") }}</a>
+          <a
+            class="hero__link"
+            href="https://gabrielhrp31.github.io/vuetify-mask/"
+            target="_blank"
+            rel="noopener"
+            >{{ t("nav.demo") }}</a
+          >
           <a
             class="hero__link"
             href="https://www.npmjs.com/package/vuetify-mask-with-slots"
@@ -21,6 +29,13 @@
             target="_blank"
             rel="noopener"
             >GitHub</a
+          >
+          <a
+            class="hero__link"
+            href="https://www.linkedin.com/in/gabrielhrp31/"
+            target="_blank"
+            rel="noopener"
+            >LinkedIn</a
           >
           <div class="lang-switch" role="group" :aria-label="localeLabel">
             <button
@@ -382,6 +397,20 @@
         {{ t("footer.maintainedBy") }}
         <a href="https://github.com/gabrielhrp31" target="_blank" rel="noopener"
           >gabrielhrp31</a
+        >
+        ·
+        <a
+          href="https://www.linkedin.com/in/gabrielhrp31/"
+          target="_blank"
+          rel="noopener"
+          >LinkedIn</a
+        >
+        ·
+        <a
+          href="https://gabrielhrp31.github.io/vuetify-mask/"
+          target="_blank"
+          rel="noopener"
+          >{{ t("nav.demo") }}</a
         >
         · {{ t("footer.forkOf") }}
         <a

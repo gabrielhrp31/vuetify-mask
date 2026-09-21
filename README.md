@@ -4,9 +4,14 @@ Mask and input helpers for **Vuetify 2** `v-text-field`, with **slot inheritance
 
 Forked from [juareznasato/vuetify-mask](https://github.com/juareznasato/vuetify-mask) (created by **[Juarez Nasato](https://github.com/juareznasato)**) and merged with [vue-the-mask](https://github.com/vuejs-tips/vue-the-mask) for custom masks. This fork exists to fix **slot inheritance** on Vuetify 2 wrappers — full credit to the original author for the masking foundation.
 
-- **npm:** [vuetify-mask-with-slots](https://www.npmjs.com/package/vuetify-mask-with-slots)
-- **GitHub:** [gabrielhrp31/vuetify-mask](https://github.com/gabrielhrp31/vuetify-mask)
-- **Demo:** [gabrielhrp31.github.io/vuetify-mask](https://gabrielhrp31.github.io/vuetify-mask/)
+## Links
+
+| | |
+| --- | --- |
+| **Live demo** | [gabrielhrp31.github.io/vuetify-mask](https://gabrielhrp31.github.io/vuetify-mask/) |
+| **npm** | [vuetify-mask-with-slots](https://www.npmjs.com/package/vuetify-mask-with-slots) |
+| **GitHub** | [gabrielhrp31/vuetify-mask](https://github.com/gabrielhrp31/vuetify-mask) |
+| **Author** | [Gabriel Rodrigues](https://www.linkedin.com/in/gabrielhrp31/) · [gabrielhrp.com](https://gabrielhrp.com/) |
 
 > Requires **Vue 2** + **Vuetify 2**. Not compatible with Vue 3 / Vuetify 3.
 
@@ -388,6 +393,17 @@ npm run build   # build demo
 npm run lint
 ```
 
+Live demo (GitHub Pages): https://gabrielhrp31.github.io/vuetify-mask/
+
+---
+
+## Maintainer
+
+**Gabriel Rodrigues**  
+LinkedIn: [linkedin.com/in/gabrielhrp31](https://www.linkedin.com/in/gabrielhrp31/) · Site: [gabrielhrp.com](https://gabrielhrp.com/) · GitHub: [gabrielhrp31](https://github.com/gabrielhrp31)
+
+Original package by [Juarez Nasato](https://github.com/juareznasato).
+
 ---
 
 ## Changelog
@@ -397,6 +413,7 @@ npm run lint
 - Fix paste (`Ctrl+V`) wiping `v-model` to `null`/`empty` on CPF, CNPJ, CEP, Integer, and DotNumber (especially with `applyAfter` / `empty: null`)
 - Always `preventDefault` on paste and read `text/plain` from the clipboard
 - Keep partial values while the mask is incomplete; keep previous value on invalid CPF/CNPJ instead of clearing
+- Docs: highlight live demo, LinkedIn, and maintainer links
 
 ### 2.4.8
 
