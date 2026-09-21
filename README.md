@@ -6,6 +6,7 @@ Forked from [juareznasato/vuetify-mask](https://github.com/juareznasato/vuetify-
 
 - **npm:** [vuetify-mask-with-slots](https://www.npmjs.com/package/vuetify-mask-with-slots)
 - **GitHub:** [gabrielhrp31/vuetify-mask](https://github.com/gabrielhrp31/vuetify-mask)
+- **Demo:** [gabrielhrp31.github.io/vuetify-mask](https://gabrielhrp31.github.io/vuetify-mask/)
 
 > Requires **Vue 2** + **Vuetify 2**. Not compatible with Vue 3 / Vuetify 3.
 
