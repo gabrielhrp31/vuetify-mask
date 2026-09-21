@@ -57,11 +57,17 @@
               rel="noopener"
               ><code>vuetify-mask@1.1.2</code></a
             >
-            (o
-            <em>latest</em> até hoje no npm). Os componentes encapsulam o
-            <code>v-text-field</code>, mas
-            <strong>não encaminham slots</strong> — no código publicado, o
-            template fecha o campo sem
+            criado por
+            <a
+              href="https://github.com/juareznasato"
+              target="_blank"
+              rel="noopener"
+              >Juarez Nasato</a
+            >
+            — ótimo trabalho de base para máscaras no Vuetify 2. Os componentes
+            encapsulam o <code>v-text-field</code>, mas
+            <strong>não encaminham slots</strong> — no código publicado
+            (<code>latest</code> no npm até hoje), o template fecha o campo sem
             <code>$slots</code> / <code>$scopedSlots</code>. Resultado: append,
             prepend, label custom e afins simplesmente não apareciam.
           </p>
@@ -78,14 +84,24 @@
           </p>
           <p>
             Foi daí que nasceu o
-            <strong>vuetify-mask-with-slots</strong>: um fork para manter as
-            máscaras e fazer a herança de slots funcionar de verdade no Vuetify
-            2. O projeto ficou um tempo parado — faltava pouco para ficar
-            apresentável — e, com ajuda de agentes de IA, finalizei a
-            documentação, a demo e a publicação.
+            <strong>vuetify-mask-with-slots</strong>: um fork do trabalho do
+            Juarez, para manter as máscaras e fazer a herança de slots funcionar
+            de verdade no Vuetify 2 — com todo o crédito ao autor original. O
+            projeto ficou um tempo parado — faltava pouco para ficar apresentável
+            — e, com ajuda de agentes de IA, finalizei a documentação, a demo e
+            a publicação.
           </p>
         </div>
         <ul class="story__proofs">
+          <li>
+            <a
+              href="https://github.com/juareznasato/vuetify-mask"
+              target="_blank"
+              rel="noopener"
+              >Original · Juarez Nasato</a
+            >
+            <span>autor do vuetify-mask</span>
+          </li>
           <li>
             <a
               href="https://www.npmjs.com/package/vuetify-mask/v/1.1.2"
@@ -93,7 +109,7 @@
               rel="noopener"
               >npm · vuetify-mask@1.1.2</a
             >
-            <span>versão com o bug (latest)</span>
+            <span>versão sem forward de slots</span>
           </li>
           <li>
             <a
@@ -102,13 +118,7 @@
               rel="noopener"
               >GitHub · issue #33</a
             >
-            <span>slots não funcionam — relato público</span>
-          </li>
-          <li>
-            <a href="#slot-demo" class="story__proof-anchor"
-              >Demo ao vivo · slot append</a
-            >
-            <span>funcionando neste fork</span>
+            <span>relato público do bug</span>
           </li>
         </ul>
       </div>
@@ -395,9 +405,20 @@
 
     <footer class="footer">
       <p>
-        <strong>vuetify-mask-with-slots</strong> · MIT ·
-        <a href="https://github.com/gabrielhrp31/vuetify-mask" target="_blank"
+        <strong>vuetify-mask-with-slots</strong> · MIT · mantido por
+        <a href="https://github.com/gabrielhrp31" target="_blank" rel="noopener"
           >gabrielhrp31</a
+        >
+        · fork de
+        <a
+          href="https://github.com/juareznasato/vuetify-mask"
+          target="_blank"
+          rel="noopener"
+          >vuetify-mask</a
+        >
+        por
+        <a href="https://github.com/juareznasato" target="_blank" rel="noopener"
+          >Juarez Nasato</a
         >
       </p>
     </footer>

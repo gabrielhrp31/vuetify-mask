@@ -2,7 +2,7 @@
 
 Mask and input helpers for **Vuetify 2** `v-text-field`, with **slot inheritance** working correctly.
 
-Forked from [juareznasato/vuetify-mask](https://github.com/juareznasato/vuetify-mask) and merged with [vue-the-mask](https://github.com/vuejs-tips/vue-the-mask) for custom masks.
+Forked from [juareznasato/vuetify-mask](https://github.com/juareznasato/vuetify-mask) (created by **[Juarez Nasato](https://github.com/juareznasato)**) and merged with [vue-the-mask](https://github.com/vuejs-tips/vue-the-mask) for custom masks. This fork exists to fix **slot inheritance** on Vuetify 2 wrappers — full credit to the original author for the masking foundation.
 
 - **npm:** [vuetify-mask-with-slots](https://www.npmjs.com/package/vuetify-mask-with-slots)
 - **GitHub:** [gabrielhrp31/vuetify-mask](https://github.com/gabrielhrp31/vuetify-mask)
