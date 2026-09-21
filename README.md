@@ -10,6 +10,14 @@ Forked from [juareznasato/vuetify-mask](https://github.com/juareznasato/vuetify-
 
 > Requires **Vue 2** + **Vuetify 2**. Not compatible with Vue 3 / Vuetify 3.
 
+The live demo defaults to **English**, with a **PT** language toggle.
+
+---
+
+## Why this fork
+
+The original [`vuetify-mask@1.1.2`](https://www.npmjs.com/package/vuetify-mask/v/1.1.2) (still `latest` on npm) wraps `v-text-field` **without forwarding slots** — so `append`, `prepend`, and similar content never render. Public report: [issue #33](https://github.com/juareznasato/vuetify-mask/issues/33). This package keeps the masking features and fixes slot inheritance.
+
 ---
 
 ## Install
@@ -388,6 +396,7 @@ npm run lint
 
 - Documentation rewrite aligned with the real API (components, peers, options, examples)
 - Clearer package description on npm
+- English-first demo with EN/PT i18n toggle; origin story and credits on the demo site
 
 ### 2.4.7
 

@@ -22,75 +22,58 @@
             rel="noopener"
             >GitHub</a
           >
+          <div class="lang-switch" role="group" :aria-label="localeLabel">
+            <button
+              type="button"
+              class="lang-switch__btn"
+              :class="{ 'is-active': locale === 'en' }"
+              @click="setLocale('en')"
+            >
+              EN
+            </button>
+            <button
+              type="button"
+              class="lang-switch__btn"
+              :class="{ 'is-active': locale === 'pt' }"
+              @click="setLocale('pt')"
+            >
+              PT
+            </button>
+          </div>
         </div>
       </nav>
 
       <div class="hero__content">
-        <p class="hero__eyebrow">Vue 2 · Vuetify 2 · slots</p>
+        <p class="hero__eyebrow">{{ t("hero.eyebrow") }}</p>
         <h1 class="hero__title">
-          Máscaras que<br />
-          <span class="hero__title-accent">respeitam seus slots</span>
+          {{ t("hero.titleBefore") }}<br />
+          <span class="hero__title-accent">{{ t("hero.titleAccent") }}</span>
         </h1>
         <p class="hero__lead">
-          Demo ao vivo do pacote
-          <strong>vuetify-mask-with-slots</strong> — money, datas, CPF/CNPJ,
-          máscaras custom e mais.
+          {{ t("hero.leadBefore") }}
+          <strong>vuetify-mask-with-slots</strong>
+          {{ t("hero.leadAfter") }}
         </p>
         <div class="hero__cta">
-          <a class="btn btn--primary" href="#examples">Ver exemplos</a>
-          <a class="btn btn--ghost-link" href="#historia">A história</a>
+          <a class="btn btn--primary" href="#examples">{{
+            t("hero.ctaExamples")
+          }}</a>
+          <a class="btn btn--ghost-link" href="#story">{{
+            t("hero.ctaStory")
+          }}</a>
           <code class="btn btn--ghost">npm i vuetify-mask-with-slots</code>
         </div>
       </div>
     </header>
 
-    <section id="historia" class="story">
+    <section id="story" class="story">
       <div class="story__inner">
-        <p class="story__eyebrow">Por que este pacote existe</p>
-        <h2 class="story__title">Nasceu de um bug em produção</h2>
+        <p class="story__eyebrow">{{ t("story.eyebrow") }}</p>
+        <h2 class="story__title">{{ t("story.title") }}</h2>
         <div class="story__body">
-          <p>
-            Na R2DA, à frente do time de frontend, usávamos o pacote original
-            <a
-              href="https://www.npmjs.com/package/vuetify-mask/v/1.1.2"
-              target="_blank"
-              rel="noopener"
-              ><code>vuetify-mask@1.1.2</code></a
-            >
-            criado por
-            <a
-              href="https://github.com/juareznasato"
-              target="_blank"
-              rel="noopener"
-              >Juarez Nasato</a
-            >
-            — ótimo trabalho de base para máscaras no Vuetify 2. Os componentes
-            encapsulam o <code>v-text-field</code>, mas
-            <strong>não encaminham slots</strong> — no código publicado
-            (<code>latest</code> no npm até hoje), o template fecha o campo sem
-            <code>$slots</code> / <code>$scopedSlots</code>. Resultado: append,
-            prepend, label custom e afins simplesmente não apareciam.
-          </p>
-          <p>
-            Isso não era só impressão nossa. A issue
-            <a
-              href="https://github.com/juareznasato/vuetify-mask/issues/33"
-              target="_blank"
-              rel="noopener"
-              >#33 — Using slots</a
-            >
-            no repositório original descreve exatamente o mesmo problema (ainda
-            aberta), com outras pessoas confirmando.
-          </p>
-          <p>
-            Foi daí que nasceu o
-            <strong>vuetify-mask-with-slots</strong>: um fork do trabalho do
-            Juarez, para manter as máscaras e fazer a herança de slots funcionar
-            de verdade no Vuetify 2 — com todo o crédito ao autor original. O
-            projeto ficou um tempo parado — faltava pouco para ficar apresentável
-            — e, com ajuda de agentes de IA, finalizei a documentação, a demo e
-            a publicação.
-          </p>
+          <p v-html="t('story.p1')" />
+          <p v-html="t('story.p2')" />
+          <p v-html="t('story.p3')" />
         </div>
         <ul class="story__proofs">
           <li>
@@ -98,27 +81,27 @@
               href="https://github.com/juareznasato/vuetify-mask"
               target="_blank"
               rel="noopener"
-              >Original · Juarez Nasato</a
+              >{{ t("story.proofOriginal") }}</a
             >
-            <span>autor do vuetify-mask</span>
+            <span>{{ t("story.proofOriginalHint") }}</span>
           </li>
           <li>
             <a
               href="https://www.npmjs.com/package/vuetify-mask/v/1.1.2"
               target="_blank"
               rel="noopener"
-              >npm · vuetify-mask@1.1.2</a
+              >{{ t("story.proofNpm") }}</a
             >
-            <span>versão sem forward de slots</span>
+            <span>{{ t("story.proofNpmHint") }}</span>
           </li>
           <li>
             <a
               href="https://github.com/juareznasato/vuetify-mask/issues/33"
               target="_blank"
               rel="noopener"
-              >GitHub · issue #33</a
+              >{{ t("story.proofIssue") }}</a
             >
-            <span>relato público do bug</span>
+            <span>{{ t("story.proofIssueHint") }}</span>
           </li>
         </ul>
       </div>
@@ -126,22 +109,22 @@
 
     <main id="examples" class="examples">
       <div class="examples__intro">
-        <h2>Exemplos interativos</h2>
-        <p>Digite nos campos — o <code>v-model</code> atualiza em tempo real.</p>
+        <h2>{{ t("examples.title") }}</h2>
+        <p>{{ t("examples.subtitle") }}</p>
       </div>
 
       <div class="examples__grid">
         <demo-card
           title="Money"
           tag="decimal"
-          hint="Locale pt-BR, prefixo R$"
+          :hint="t('examples.moneyHint')"
           :value="money"
           delay="40ms"
         >
           <v-text-field-money
             v-model="money"
             :properties="{
-              label: 'Valor',
+              label: t('examples.moneyLabel'),
               prefix: 'R$',
               outlined: true,
               clearable: true,
@@ -154,14 +137,14 @@
         <demo-card
           title="Percent"
           tag="decimal"
-          hint="Mesmo motor do money, com sufixo %"
+          :hint="t('examples.percentHint')"
           :value="percent"
           delay="80ms"
         >
           <v-text-field-percent
             v-model="percent"
             :properties="{
-              label: 'Percentual',
+              label: t('examples.percentLabel'),
               suffix: '%',
               outlined: true,
               clearable: true,
@@ -171,15 +154,10 @@
           />
         </demo-card>
 
-        <demo-card
-          title="Integer"
-          tag="digits"
-          :value="integer"
-          delay="120ms"
-        >
+        <demo-card title="Integer" tag="digits" :value="integer" delay="120ms">
           <v-text-field-integer
             v-model="integer"
-            label="Inteiro"
+            :label="t('examples.integerLabel')"
             :properties="{ outlined: true, clearable: true, dense: true }"
             :options="{
               inputMask: '#########',
@@ -197,7 +175,7 @@
         >
           <v-text-field-simplemask
             v-model="card"
-            label="Cartão"
+            :label="t('examples.cardLabel')"
             mask="#### #### #### ####"
             outlined
             dense
@@ -208,13 +186,13 @@
         <demo-card
           title="Phone"
           tag="simplemask"
-          hint="Máscara BR celular"
+          :hint="t('examples.phoneHint')"
           :value="phone"
           delay="200ms"
         >
           <v-text-field-simplemask
             v-model="phone"
-            label="Telefone"
+            :label="t('examples.phoneLabel')"
             mask="(##) #####-####"
             outlined
             dense
@@ -225,13 +203,13 @@
         <demo-card
           title="Custom mask"
           tag="simplemask"
-          hint="Tokens X e # · masked"
+          :hint="t('examples.customHint')"
           :value="customMask"
           delay="240ms"
         >
           <v-text-field-simplemask
             v-model="customMask"
-            label="Código"
+            :label="t('examples.customLabel')"
             mask="XX-XXXX-XXXX-XXX"
             masked
             outlined
@@ -243,7 +221,7 @@
         <demo-card
           title="CPF"
           tag="br"
-          hint="Valida dígitos com applyAfter"
+          :hint="t('examples.cpfHint')"
           :value="cpf"
           delay="280ms"
         >
@@ -259,12 +237,7 @@
           />
         </demo-card>
 
-        <demo-card
-          title="CNPJ"
-          tag="br"
-          :value="cnpj"
-          delay="320ms"
-        >
+        <demo-card title="CNPJ" tag="br" :value="cnpj" delay="320ms">
           <v-text-field-cnpj
             v-model="cnpj"
             label="CNPJ"
@@ -293,13 +266,13 @@
         <demo-card
           title="Dot number"
           tag="digits"
-          hint="Apenas números e ponto"
+          :hint="t('examples.dotHint')"
           :value="dotNumber"
           delay="400ms"
         >
           <v-text-field-dotnumber
             v-model="dotNumber"
-            label="Com pontos"
+            :label="t('examples.dotLabel')"
             :properties="{ outlined: true, clearable: true, dense: true }"
             :options="{ length: 20, empty: null }"
           />
@@ -308,13 +281,13 @@
         <demo-card
           title="DateTime (ms)"
           tag="date"
-          hint="v-model em milissegundos"
+          :hint="t('examples.dateMsHint')"
           :value="dateMs"
           delay="440ms"
         >
           <v-text-field-datetimepicker
             v-model="dateMs"
-            label="Data e hora"
+            :label="t('examples.dateMsLabel')"
             :time="true"
             :properties="{
               outlined: true,
@@ -324,9 +297,9 @@
             }"
             :options="{
               inputMask: 'DD/MM/YYYY HH:mm',
-              locale: 'pt-BR',
-              tabDateTitle: 'Data',
-              tabTimeTitle: 'Hora',
+              locale: datePickerLocale,
+              tabDateTitle: t('examples.tabDate'),
+              tabTimeTitle: t('examples.tabTime'),
               useSeconds: false
             }"
           />
@@ -335,13 +308,13 @@
         <demo-card
           title="DateTime (string)"
           tag="date"
-          hint="v-model formatado"
+          :hint="t('examples.dateStrHint')"
           :value="dateStr"
           delay="480ms"
         >
           <v-text-field-datetimestringpicker
             v-model="dateStr"
-            label="Data string"
+            :label="t('examples.dateStrLabel')"
             :properties="{
               outlined: true,
               dense: true,
@@ -350,9 +323,9 @@
             }"
             :options="{
               inputMask: 'YYYY-MM-DD',
-              locale: 'pt-BR',
-              tabDateTitle: 'Data',
-              tabTimeTitle: 'Hora'
+              locale: datePickerLocale,
+              tabDateTitle: t('examples.tabDate'),
+              tabTimeTitle: t('examples.tabTime')
             }"
           />
         </demo-card>
@@ -360,13 +333,13 @@
         <demo-card
           title="File → Base64"
           tag="file"
-          hint="Selecione uma imagem"
+          :hint="t('examples.fileHint')"
           :value="filePreview"
           delay="520ms"
         >
           <v-text-field-filebase64
             v-model="fileBase64"
-            label="Arquivo"
+            :label="t('examples.fileLabel')"
             :properties="{
               outlined: true,
               dense: true,
@@ -382,13 +355,13 @@
           id="slot-demo"
           title="Slot append"
           tag="slots"
-          hint="No vuetify-mask@1.1.2 isso não aparecia — aqui funciona"
+          :hint="t('examples.slotHint')"
           :value="slotMask"
           delay="560ms"
         >
           <v-text-field-simplemask
             v-model="slotMask"
-            label="Busca mascarada"
+            :label="t('examples.slotLabel')"
             mask="XX-XXXX-XXXX-XXX"
             outlined
             dense
@@ -405,18 +378,19 @@
 
     <footer class="footer">
       <p>
-        <strong>vuetify-mask-with-slots</strong> · MIT · mantido por
+        <strong>vuetify-mask-with-slots</strong> · MIT ·
+        {{ t("footer.maintainedBy") }}
         <a href="https://github.com/gabrielhrp31" target="_blank" rel="noopener"
           >gabrielhrp31</a
         >
-        · fork de
+        · {{ t("footer.forkOf") }}
         <a
           href="https://github.com/juareznasato/vuetify-mask"
           target="_blank"
           rel="noopener"
           >vuetify-mask</a
         >
-        por
+        {{ t("footer.by") }}
         <a href="https://github.com/juareznasato" target="_blank" rel="noopener"
           >Juarez Nasato</a
         >
@@ -431,11 +405,29 @@
 
 <script>
 import DemoCard from "@/demo/DemoCard.vue";
+import {
+  DEFAULT_LOCALE,
+  getMessage,
+  messages
+} from "@/i18n/messages.js";
+
+const STORAGE_KEY = "vuetify-mask-locale";
+
+function resolveInitialLocale() {
+  try {
+    const saved = localStorage.getItem(STORAGE_KEY);
+    if (saved && messages[saved]) return saved;
+  } catch (e) {
+    /* ignore */
+  }
+  return DEFAULT_LOCALE;
+}
 
 export default {
   name: "App",
   components: { DemoCard },
   data: () => ({
+    locale: resolveInitialLocale(),
     money: "1234.56",
     percent: "12.34",
     integer: "123456789",
@@ -458,11 +450,49 @@ export default {
     filePreview() {
       if (!this.fileBase64) return "";
       return this.fileBase64.slice(0, 48) + "…";
+    },
+    datePickerLocale() {
+      return this.locale === "pt" ? "pt-BR" : "en-US";
+    },
+    localeLabel() {
+      return this.locale === "pt" ? "Idioma" : "Language";
+    }
+  },
+  watch: {
+    locale: {
+      immediate: true,
+      handler(value) {
+        this.applyDocumentLocale(value);
+      }
     }
   },
   methods: {
+    t(path) {
+      return (
+        getMessage(this.locale, path) ||
+        getMessage(DEFAULT_LOCALE, path) ||
+        path
+      );
+    },
+    setLocale(locale) {
+      if (!messages[locale]) return;
+      this.locale = locale;
+      try {
+        localStorage.setItem(STORAGE_KEY, locale);
+      } catch (e) {
+        /* ignore */
+      }
+    },
+    applyDocumentLocale(locale) {
+      const htmlLang = locale === "pt" ? "pt-BR" : "en";
+      document.documentElement.lang = htmlLang;
+      document.title = this.t("meta.title");
+      const meta = document.querySelector('meta[name="description"]');
+      if (meta) meta.setAttribute("content", this.t("meta.description"));
+    },
     onSearch() {
-      this.snackText = `Buscando: ${this.slotMask || "(vazio)"}`;
+      this.snackText = `${this.t("examples.searching")} ${this.slotMask ||
+        "(empty)"}`;
       this.snack = true;
     }
   }
@@ -545,6 +575,7 @@ body {
 }
 
 .hero,
+.story,
 .examples,
 .footer {
   position: relative;
@@ -575,6 +606,7 @@ body {
 
 .hero__links {
   display: flex;
+  align-items: center;
   gap: 1rem;
 }
 
@@ -587,6 +619,33 @@ body {
 
 .hero__link:hover {
   color: var(--accent);
+}
+
+.lang-switch {
+  display: inline-flex;
+  padding: 0.15rem;
+  border-radius: 999px;
+  border: 1px solid rgba(148, 178, 210, 0.22);
+  background: rgba(26, 34, 45, 0.85);
+}
+
+.lang-switch__btn {
+  border: 0;
+  background: transparent;
+  color: var(--muted);
+  font: inherit;
+  font-size: 0.72rem;
+  font-weight: 700;
+  letter-spacing: 0.06em;
+  padding: 0.35rem 0.55rem;
+  border-radius: 999px;
+  cursor: pointer;
+  transition: background 0.2s ease, color 0.2s ease;
+}
+
+.lang-switch__btn.is-active {
+  background: var(--accent);
+  color: #0f1419;
 }
 
 .hero__content {
@@ -685,8 +744,6 @@ body {
 }
 
 .story {
-  position: relative;
-  z-index: 1;
   max-width: 1100px;
   margin: 0 auto 3rem;
   padding: 0 1.5rem;
@@ -818,10 +875,6 @@ body {
   color: var(--muted);
 }
 
-.examples__intro code {
-  color: var(--accent-2);
-}
-
 .examples__grid {
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
@@ -863,7 +916,6 @@ body {
   text-decoration: underline;
 }
 
-/* Vuetify fields on dark cards */
 .demo-card .v-text-field--outlined fieldset {
   border-color: rgba(148, 178, 210, 0.28) !important;
 }
