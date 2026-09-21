@@ -1,6 +1,6 @@
 {
 	"name": "vuetify-mask-with-slots",
-	"version": "2.4.8",
+	"version": "2.4.9",
 	"description": "Vuetify 2 text-field masks with working slots (money, percent, CPF/CNPJ/CEP, datetime, vue-the-mask)",
 	"private": false,
 	"license": "MIT",

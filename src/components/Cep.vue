@@ -74,38 +74,37 @@ export default {
   watch: {},
   methods: {
     paste: function(e) {
-      let clipboardData = e.clipboardData || window.clipboardData;
-      let pastedData = clipboardData.getData("Text");
-      let valor = this.machineFormat(pastedData);
-      if (valor === this.value) {
-        e.preventDefault();
-        return;
-      }
+      e.preventDefault();
+      const clipboardData = e.clipboardData || window.clipboardData;
+      if (!clipboardData) return;
+      const pastedData =
+        clipboardData.getData("text/plain") ||
+        clipboardData.getData("Text") ||
+        "";
+      const valor = this.machineFormat(pastedData);
+      if (valor === this.value) return;
       this.$emit("input", valor);
     },
     humanFormat: function(value) {
-      if (value) {
-        value = this.formatValue(value, this.inputMask);
-      } else {
-        value = this.options.empty;
+      if (value !== null && value !== undefined && value !== "") {
+        return this.formatValue(value, this.inputMask);
       }
-      return value;
+      return this.options.empty == null ? "" : this.options.empty;
     },
 
     machineFormat(value) {
       if (value) {
         value = this.formatValue(value, this.options.outputMask);
         if (value === "") {
-          value = this.options.empty;
+          return this.options.empty;
         }
-        // Apply the mask only only after filling
+        // Apply the mask only after filling
         if (this.options.applyAfter) {
           if (value.length !== this.options.outputMask.length) {
-            value = this.options.empty;
-          } else {
-            // Event sended after filling the mask
-            this.$emit("masked");
+            // Keep partial digits so paste/typing is not wiped to empty/null
+            return value;
           }
+          this.$emit("masked");
         }
       } else {
         value = this.options.empty;

@@ -392,6 +392,12 @@ npm run lint
 
 ## Changelog
 
+### 2.4.9
+
+- Fix paste (`Ctrl+V`) wiping `v-model` to `null`/`empty` on CPF, CNPJ, CEP, Integer, and DotNumber (especially with `applyAfter` / `empty: null`)
+- Always `preventDefault` on paste and read `text/plain` from the clipboard
+- Keep partial values while the mask is incomplete; keep previous value on invalid CPF/CNPJ instead of clearing
+
 ### 2.4.8
 
 - Documentation rewrite aligned with the real API (components, peers, options, examples)
