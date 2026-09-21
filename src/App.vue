@@ -560,12 +560,13 @@ body {
 }
 
 .btn--primary {
-  color: #0f1419;
+  color: #0f1419 !important;
   background: var(--accent);
   box-shadow: 0 8px 24px rgba(62, 207, 142, 0.25);
 }
 
 .btn--primary:hover {
+  color: #0f1419 !important;
   transform: translateY(-2px);
   box-shadow: 0 12px 28px rgba(62, 207, 142, 0.35);
 }
