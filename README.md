@@ -10,7 +10,7 @@ Forked from [juareznasato/vuetify-mask](https://github.com/juareznasato/vuetify-
 
 > Requires **Vue 2** + **Vuetify 2**. Not compatible with Vue 3 / Vuetify 3.
 
-The live demo defaults to **English**, with a **PT** language toggle.
+The live demo picks **EN** or **PT** from the browser language (with a manual toggle), and remembers your choice.
 
 ---
 
@@ -396,7 +396,7 @@ npm run lint
 
 - Documentation rewrite aligned with the real API (components, peers, options, examples)
 - Clearer package description on npm
-- English-first demo with EN/PT i18n toggle; origin story and credits on the demo site
+- Demo with EN/PT i18n (browser language first, manual toggle); origin story and credits on the demo site
 
 ### 2.4.7
 

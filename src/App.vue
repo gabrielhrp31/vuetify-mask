@@ -420,6 +420,21 @@ function resolveInitialLocale() {
   } catch (e) {
     /* ignore */
   }
+
+  const candidates = [];
+  if (typeof navigator !== "undefined") {
+    if (Array.isArray(navigator.languages)) {
+      candidates.push(...navigator.languages);
+    }
+    if (navigator.language) candidates.push(navigator.language);
+  }
+
+  for (const lang of candidates) {
+    const normalized = String(lang || "").toLowerCase();
+    if (normalized.startsWith("pt")) return "pt";
+    if (normalized.startsWith("en")) return "en";
+  }
+
   return DEFAULT_LOCALE;
 }
 
