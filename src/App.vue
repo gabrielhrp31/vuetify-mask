@@ -38,10 +38,81 @@
         </p>
         <div class="hero__cta">
           <a class="btn btn--primary" href="#examples">Ver exemplos</a>
+          <a class="btn btn--ghost-link" href="#historia">A história</a>
           <code class="btn btn--ghost">npm i vuetify-mask-with-slots</code>
         </div>
       </div>
     </header>
+
+    <section id="historia" class="story">
+      <div class="story__inner">
+        <p class="story__eyebrow">Por que este pacote existe</p>
+        <h2 class="story__title">Nasceu de um bug em produção</h2>
+        <div class="story__body">
+          <p>
+            Na R2DA, à frente do time de frontend, usávamos o pacote original
+            <a
+              href="https://www.npmjs.com/package/vuetify-mask/v/1.1.2"
+              target="_blank"
+              rel="noopener"
+              ><code>vuetify-mask@1.1.2</code></a
+            >
+            (o
+            <em>latest</em> até hoje no npm). Os componentes encapsulam o
+            <code>v-text-field</code>, mas
+            <strong>não encaminham slots</strong> — no código publicado, o
+            template fecha o campo sem
+            <code>$slots</code> / <code>$scopedSlots</code>. Resultado: append,
+            prepend, label custom e afins simplesmente não apareciam.
+          </p>
+          <p>
+            Isso não era só impressão nossa. A issue
+            <a
+              href="https://github.com/juareznasato/vuetify-mask/issues/33"
+              target="_blank"
+              rel="noopener"
+              >#33 — Using slots</a
+            >
+            no repositório original descreve exatamente o mesmo problema (ainda
+            aberta), com outras pessoas confirmando.
+          </p>
+          <p>
+            Foi daí que nasceu o
+            <strong>vuetify-mask-with-slots</strong>: um fork para manter as
+            máscaras e fazer a herança de slots funcionar de verdade no Vuetify
+            2. O projeto ficou um tempo parado — faltava pouco para ficar
+            apresentável — e, com ajuda de agentes de IA, finalizei a
+            documentação, a demo e a publicação.
+          </p>
+        </div>
+        <ul class="story__proofs">
+          <li>
+            <a
+              href="https://www.npmjs.com/package/vuetify-mask/v/1.1.2"
+              target="_blank"
+              rel="noopener"
+              >npm · vuetify-mask@1.1.2</a
+            >
+            <span>versão com o bug (latest)</span>
+          </li>
+          <li>
+            <a
+              href="https://github.com/juareznasato/vuetify-mask/issues/33"
+              target="_blank"
+              rel="noopener"
+              >GitHub · issue #33</a
+            >
+            <span>slots não funcionam — relato público</span>
+          </li>
+          <li>
+            <a href="#slot-demo" class="story__proof-anchor"
+              >Demo ao vivo · slot append</a
+            >
+            <span>funcionando neste fork</span>
+          </li>
+        </ul>
+      </div>
+    </section>
 
     <main id="examples" class="examples">
       <div class="examples__intro">
@@ -298,9 +369,10 @@
         </demo-card>
 
         <demo-card
+          id="slot-demo"
           title="Slot append"
           tag="slots"
-          hint="Botão no slot append do simplemask"
+          hint="No vuetify-mask@1.1.2 isso não aparecia — aqui funciona"
           :value="slotMask"
           delay="560ms"
         >
@@ -578,6 +650,127 @@ body {
   font-family: var(--font-body);
   font-weight: 500;
   font-size: 0.82rem;
+}
+
+.btn--ghost-link {
+  color: var(--text) !important;
+  background: transparent;
+  border-color: rgba(148, 178, 210, 0.28);
+}
+
+.btn--ghost-link:hover {
+  border-color: var(--accent);
+  color: var(--accent) !important;
+}
+
+.story {
+  position: relative;
+  z-index: 1;
+  max-width: 1100px;
+  margin: 0 auto 3rem;
+  padding: 0 1.5rem;
+}
+
+.story__inner {
+  padding: 1.75rem 1.85rem 1.85rem;
+  border-radius: 20px;
+  background: linear-gradient(
+    155deg,
+    rgba(26, 34, 45, 0.95) 0%,
+    rgba(18, 24, 33, 0.92) 100%
+  );
+  border: 1px solid rgba(148, 178, 210, 0.16);
+  box-shadow: 0 20px 48px rgba(0, 0, 0, 0.28);
+  opacity: 0;
+  animation: rise-in 0.75s ease 0.18s forwards;
+}
+
+.story__eyebrow {
+  margin: 0 0 0.55rem;
+  font-size: 0.72rem;
+  font-weight: 600;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--accent);
+}
+
+.story__title {
+  margin: 0 0 1.1rem;
+  font-family: var(--font-display);
+  font-size: clamp(1.35rem, 2.5vw, 1.75rem);
+  font-weight: 600;
+  letter-spacing: -0.02em;
+}
+
+.story__body {
+  display: grid;
+  gap: 0.85rem;
+  max-width: 46rem;
+}
+
+.story__body p {
+  margin: 0;
+  font-size: 0.98rem;
+  line-height: 1.65;
+  color: var(--muted);
+}
+
+.story__body strong {
+  color: var(--text);
+  font-weight: 600;
+}
+
+.story__body a {
+  color: var(--accent-2);
+  text-decoration: none;
+}
+
+.story__body a:hover {
+  color: var(--accent);
+  text-decoration: underline;
+}
+
+.story__body code {
+  font-size: 0.88em;
+  color: #c9d6e5;
+}
+
+.story__proofs {
+  list-style: none;
+  display: grid;
+  gap: 0.65rem;
+  margin: 1.4rem 0 0;
+  padding: 1.15rem 0 0;
+  border-top: 1px solid rgba(148, 178, 210, 0.14);
+}
+
+@media (min-width: 720px) {
+  .story__proofs {
+    grid-template-columns: repeat(3, 1fr);
+    gap: 1rem;
+  }
+}
+
+.story__proofs li {
+  display: flex;
+  flex-direction: column;
+  gap: 0.2rem;
+}
+
+.story__proofs a {
+  color: var(--accent);
+  text-decoration: none;
+  font-weight: 600;
+  font-size: 0.9rem;
+}
+
+.story__proofs a:hover {
+  text-decoration: underline;
+}
+
+.story__proofs span {
+  font-size: 0.78rem;
+  color: var(--muted);
 }
 
 .examples {
